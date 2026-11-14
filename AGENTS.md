@@ -28,3 +28,12 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Services, packages and prices live only in `src/lib/services.ts`; components, the enquiry form, JSON-LD and tests read from it so prices never drift. `src/test/services.test.ts` locks the values.
+- Official contact details and social URLs live in `src/lib/site.ts`; never hardcode them elsewhere.
+- The site is one scrolling page (`src/routes/index.tsx`) composed from `src/components/site/*`, because the brief asks for nav links that smooth-scroll to sections.
+- Service buttons preselect the enquiry form through `EnquiryProvider` (`src/components/site/enquiry-context.tsx`), so the selection survives scrolling to the contact section.
+- Enquiries are submitted via the `submitEnquiry` server function into the locked `author_enquiries` table (no public policies; inserted server-side after zod validation, honeypot and min-fill-time checks; `client_request_id` is unique to absorb duplicate submits).
+- Portfolio entries live in `src/lib/portfolio.ts` with a `kind` label so demonstration visuals are never shown as client work; add real projects with `kind: "client"`.
