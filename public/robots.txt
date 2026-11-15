@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://brainboxworld.net/sitemap.xml
+Sitemap: https://brainboxpress.lovable.app/sitemap.xml

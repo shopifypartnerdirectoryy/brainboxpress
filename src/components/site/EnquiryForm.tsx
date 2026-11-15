@@ -133,7 +133,7 @@ export function EnquiryForm() {
         role="status"
         className="flex min-h-[32rem] flex-col items-center justify-center px-4 text-center outline-none"
       >
-        <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold bg-ivory text-success">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold bg-mist text-success">
           <CheckCircle2 className="h-7 w-7" aria-hidden="true" />
         </span>
         <h3 className="mt-8 text-4xl text-navy">Thank you — your enquiry has been received.</h3>
@@ -194,7 +194,7 @@ export function EnquiryForm() {
           <FieldError id={errId("service")} error={errors.service} />
         </div>
 
-        {packages.length > 0 && (
+        {packages.length > 0 && packages.length <= 4 && (
           <fieldset
             className="sm:col-span-2"
             aria-describedby={errors.package ? errId("package") : undefined}
@@ -240,6 +240,34 @@ export function EnquiryForm() {
           </fieldset>
         )}
 
+        {packages.length > 4 && (
+          <div className="sm:col-span-2">
+            <FieldLabel htmlFor={fieldId("package")}>Choose a Package</FieldLabel>
+            <div className="relative">
+              <select
+                id={fieldId("package")}
+                value={values.package}
+                onChange={(e) => update("package", e.target.value)}
+                disabled={submitting}
+                aria-invalid={!!errors.package}
+                aria-describedby={errors.package ? errId("package") : undefined}
+                className={cn(inputClass, "appearance-none pr-10", !values.package && "text-muted-foreground")}
+              >
+                <option value="" disabled>
+                  Select a package
+                </option>
+                {packages.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.formLabel}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-1 top-1/2 h-4 w-4 -translate-y-1/2 text-gold-deep" />
+            </div>
+            <FieldError id={errId("package")} error={errors.package} />
+          </div>
+        )}
+
         <div className="sm:col-span-2">
           <FieldLabel htmlFor={fieldId("message")}>Message</FieldLabel>
           <textarea
@@ -249,7 +277,7 @@ export function EnquiryForm() {
             onChange={(e) => update("message", e.target.value)}
             disabled={submitting}
             maxLength={3000}
-            placeholder="Tell us about your book, genre, audience and what you'd like to achieve."
+            placeholder={service?.messageHint ?? "Tell us about your book, genre, audience and what you'd like to achieve."}
             aria-invalid={!!errors.message}
             aria-describedby={errors.message ? errId("message") : undefined}
             className={cn(inputClass, "resize-y leading-relaxed")}
@@ -277,7 +305,7 @@ export function EnquiryForm() {
         <p className="max-w-xs text-xs leading-relaxed text-muted-foreground">
           We use your details only to reply to your enquiry.
         </p>
-        <Button type="submit" variant="navy" size="xl" disabled={submitting} className="w-full sm:w-auto">
+        <Button type="submit" variant="gold" size="xl" disabled={submitting} className="w-full sm:w-auto">
           {submitting ? (
             <>
               <Loader2 className="animate-spin" aria-hidden="true" /> Sending…

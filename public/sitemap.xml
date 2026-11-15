@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://brainboxworld.net/</loc>
-    <lastmod>2026-11-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://brainboxpress.lovable.app/</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/tiktok-book-promotion</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/instagram-book-promotion</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/book-trailers</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/author-social-media-management</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/email-marketing-for-authors</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/3d-book-mockups</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/audiobook-services</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/author-website-design</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/author-website-redesign</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/goodreads-listopia-placement</loc>
+  </url>
+  <url>
+    <loc>https://brainboxpress.lovable.app/services/book-challenge</loc>
   </url>
 </urlset>

@@ -36,7 +36,7 @@ export function Process() {
 
           {STEPS.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 120} className="relative grid grid-cols-[4rem_1fr] gap-6 lg:block lg:text-center">
-              <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-gold bg-ivory font-serif text-2xl text-navy shadow-[0_0_0_8px] shadow-ivory lg:mx-auto">
+              <span className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-gold bg-mist font-serif text-2xl text-navy shadow-[0_0_0_8px] shadow-mist lg:mx-auto">
                 {s.n}
               </span>
               <div className="lg:mt-8">

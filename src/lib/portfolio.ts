@@ -1,9 +1,15 @@
 import goodreads from "@/assets/portfolio-goodreads.webp";
+import goodreadsSmall from "@/assets/portfolio-goodreads-640.webp";
 import mockup from "@/assets/portfolio-mockup.webp";
+import mockupSmall from "@/assets/portfolio-mockup-640.webp";
 import socialDesigns from "@/assets/portfolio-social-designs.webp";
+import socialDesignsSmall from "@/assets/portfolio-social-designs-640.webp";
 import socialFeature from "@/assets/portfolio-social-feature.webp";
+import socialFeatureSmall from "@/assets/portfolio-social-feature-640.webp";
 import trailer from "@/assets/portfolio-trailer.webp";
+import trailerSmall from "@/assets/portfolio-trailer-640.webp";
 import website from "@/assets/portfolio-website.webp";
+import websiteSmall from "@/assets/portfolio-website-640.webp";
 
 /**
  * Portfolio entries. Demonstration visuals must carry a non-client label.
@@ -24,6 +30,8 @@ export interface PortfolioItem {
   description: string;
   kind: PortfolioKind;
   image: string;
+  /** 640px rendition for small screens */
+  imageSmall: string;
   alt: string;
 }
 
@@ -34,6 +42,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     description: "Cinematic, atmospheric frames that introduce a book's mood and storyline.",
     kind: "concept",
     image: trailer,
+    imageSmall: trailerSmall,
     alt: "Cinematic still of an ornate hardcover book on a dark table lit by a beam of golden light",
   },
   {
@@ -42,7 +51,8 @@ export const PORTFOLIO: PortfolioItem[] = [
     description: "Polished 3D presentations of hardcover and paperback editions.",
     kind: "sample",
     image: mockup,
-    alt: "3D mockup of a navy hardcover and paperback with gold geometric cover art on an ivory plinth",
+    imageSmall: mockupSmall,
+    alt: "3D mockup of a navy hardcover and paperback with gold geometric cover art on a light plinth",
   },
   {
     id: "social-feature",
@@ -50,6 +60,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     description: "Vertical short-form content created for social book discovery.",
     kind: "illustrative",
     image: socialFeature,
+    imageSmall: socialFeatureSmall,
     alt: "Smartphone displaying a vertical video of book pages beside a navy paperback and dried flowers",
   },
   {
@@ -58,6 +69,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     description: "Cohesive static post layouts for a consistent author presence.",
     kind: "sample",
     image: socialDesigns,
+    imageSmall: socialDesignsSmall,
     alt: "Grid of square navy and gold social media post designs featuring book covers and landscapes",
   },
   {
@@ -66,6 +78,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     description: "Elegant, responsive author websites centred on the book.",
     kind: "concept",
     image: website,
+    imageSmall: websiteSmall,
     alt: "Laptop showing a minimal author website layout with a navy book cover and a gold moon",
   },
   {
@@ -74,6 +87,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     description: "Refined list and reading graphics for book-list promotion.",
     kind: "illustrative",
     image: goodreads,
+    imageSmall: goodreadsSmall,
     alt: "Tablet showing rows of illustrated book covers beside navy and gold promotional cards",
   },
 ];

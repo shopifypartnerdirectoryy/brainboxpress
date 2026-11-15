@@ -3,82 +3,32 @@ import { createFileRoute } from "@tanstack/react-router";
 import { About } from "@/components/site/About";
 import { Commitment } from "@/components/site/Commitment";
 import { Contact } from "@/components/site/Contact";
+import { Discoverability } from "@/components/site/Discoverability";
 import { EnquiryProvider } from "@/components/site/enquiry-context";
+import { Faq } from "@/components/site/Faq";
+import { FeaturedServices } from "@/components/site/FeaturedServices";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { Portfolio } from "@/components/site/Portfolio";
+import { PricingHighlights } from "@/components/site/PricingHighlights";
 import { Process } from "@/components/site/Process";
 import { Services } from "@/components/site/Services";
 import { WhyChoose } from "@/components/site/WhyChoose";
-import { SERVICES, SOCIAL_MEDIA_PACKAGES } from "@/lib/services";
-import { SITE, SOCIALS } from "@/lib/site";
+import { homeSchema, PUBLIC_ORIGIN } from "@/lib/seo";
+import { SITE } from "@/lib/site";
 
-const TITLE = "BrainboxPress | Ebook Promotion, Author Outreach & Book Marketing";
+const TITLE = "BrainboxPress | Book Marketing & Author Promotion Services";
 const DESCRIPTION =
-  "BrainboxPress helps authors showcase their books through creative ebook promotion, book trailers, social media marketing, author websites and professional promotional services.";
+  "Book promotion and author marketing services from BrainboxPress: TikTok and Instagram book features, book trailers, social media management, email marketing, audiobooks and author websites.";
 
-function structuredData() {
-  const offers = SERVICES.flatMap((s) => {
-    if (s.id === "social-media-management") {
-      return SOCIAL_MEDIA_PACKAGES.map((p) => ({
-        "@type": "Offer",
-        name: `${s.title} — ${p.name} (${p.durationDays} Days)`,
-        price: p.price,
-        priceCurrency: "USD",
-        itemOffered: { "@type": "Service", name: s.title, provider: { "@id": `${SITE.url}/#organization` } },
-      }));
-    }
-    if (s.packages) {
-      return s.packages.map((p) => ({
-        "@type": "Offer",
-        name: `${s.title} — ${p.name}`,
-        price: p.price,
-        priceCurrency: "USD",
-        itemOffered: { "@type": "Service", name: s.title, provider: { "@id": `${SITE.url}/#organization` } },
-      }));
-    }
-    return [
-      {
-        "@type": "Offer",
-        name: s.priceQualifier ? `${s.title} (${s.priceQualifier})` : s.title,
-        price: s.price,
-        priceCurrency: "USD",
-        itemOffered: { "@type": "Service", name: s.title, provider: { "@id": `${SITE.url}/#organization` } },
-      },
-    ];
-  });
-
-  return {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": `${SITE.url}/#organization`,
-        name: SITE.name,
-        url: SITE.url,
-        logo: `${SITE.url}/apple-touch-icon.png`,
-        description: DESCRIPTION,
-        email: SITE.generalEmail,
-        sameAs: SOCIALS.map((s) => s.href),
-        contactPoint: [
-          { "@type": "ContactPoint", contactType: "sales", email: SITE.generalEmail },
-          { "@type": "ContactPoint", contactType: "customer support", email: SITE.supportEmail },
-        ],
-        hasOfferCatalog: { "@type": "OfferCatalog", name: "Author promotion services", itemListElement: offers },
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${SITE.url}/#website`,
-        url: SITE.url,
-        name: SITE.name,
-        publisher: { "@id": `${SITE.url}/#organization` },
-      },
-    ],
-  };
-}
+type HomeSearch = { service?: string; package?: string };
 
 export const Route = createFileRoute("/")({
+  validateSearch: (search: { service?: unknown; package?: unknown }): HomeSearch => ({
+    ...(typeof search.service === "string" ? { service: search.service } : {}),
+    ...(typeof search.package === "string" ? { package: search.package } : {}),
+  }),
   head: () => ({
     meta: [
       { title: TITLE },
@@ -86,34 +36,38 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: SITE.url },
-      { property: "og:site_name", content: SITE.name },
+      { property: "og:url", content: `${PUBLIC_ORIGIN}/` },
       { property: "og:image", content: SITE.ogImage },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Navy and gold hardcover books arranged on ivory linen — BrainboxPress" },
+      { property: "og:image:alt", content: `${SITE.name} logo — ${SITE.tagline}` },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: SITE.ogImage },
     ],
-    links: [{ rel: "canonical", href: SITE.url }],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData()) }],
+    links: [{ rel: "canonical", href: `${PUBLIC_ORIGIN}/` }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(homeSchema(DESCRIPTION)) }],
   }),
   component: Index,
 });
 
 function Index() {
+  const search = Route.useSearch();
   return (
-    <EnquiryProvider>
+    <EnquiryProvider initial={search}>
       <Header />
       <main id="main">
         <Hero />
         <About />
+        <Discoverability />
+        <FeaturedServices />
         <Services />
         <WhyChoose />
         <Process />
         <Portfolio />
+        <PricingHighlights />
+        <Faq />
         <Commitment />
         <Contact />
       </main>

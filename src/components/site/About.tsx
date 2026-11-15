@@ -1,9 +1,10 @@
 import aboutImage from "@/assets/about-workspace.webp";
+import aboutImageSmall from "@/assets/about-workspace-640.webp";
 
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
-const FOCUS = ["Author outreach", "Creative book marketing", "Visual content creation", "Digital promotional services"];
+const FOCUS = ["Book visibility", "Author branding", "Visual content creation", "Reader outreach"];
 
 export function About() {
   return (
@@ -12,6 +13,8 @@ export function About() {
         <Reveal className="relative order-2 lg:order-1">
           <img
             src={aboutImage}
+            srcSet={`${aboutImageSmall} 640w, ${aboutImage} 1200w`}
+            sizes="(min-width: 1024px) 480px, 100vw"
             alt="An author's workspace with an open notebook, printed book cover proofs, coffee, reading glasses and navy hardcover books"
             width={1200}
             height={1504}
@@ -32,8 +35,8 @@ export function About() {
           </Reveal>
           <Reveal delay={100} className="mt-10 space-y-6 text-base leading-relaxed text-muted-foreground sm:text-[1.05rem]">
             <p className="font-serif text-2xl leading-snug text-navy sm:text-[1.7rem]">
-              BrainboxPress is an independent author-promotion and ebook marketing brand focused on helping authors
-              present their books professionally and explore meaningful promotional opportunities.
+              BrainboxPress is an author-services and book-growth brand focused on helping authors present their books
+              professionally and explore meaningful promotional opportunities.
             </p>
             <p>
               Through author outreach, creative book marketing, visual content creation and digital promotional
@@ -45,8 +48,8 @@ export function About() {
               planning, our goal is to make every author's promotional experience clear, organized and professional.
             </p>
             <p>
-              From social media book features and creative video trailers to author websites and promotional content,
-              our services are designed to support authors at different stages of their publishing journey.
+              From TikTok and Instagram book features and creative video trailers to email marketing, audiobooks and
+              author websites, our services are designed to support authors at different stages of their publishing journey.
             </p>
           </Reveal>
           <Reveal delay={180}>

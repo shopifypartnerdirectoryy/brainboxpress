@@ -59,7 +59,7 @@ export function WhyChoose() {
                 <span className="hidden font-serif text-3xl text-gold sm:block" aria-hidden="true">
                   {f.n}
                 </span>
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-ivory text-navy transition-colors duration-500 group-hover:bg-navy group-hover:text-gold">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-mist text-navy transition-colors duration-500 group-hover:bg-navy group-hover:text-gold">
                   <f.icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
                 </span>
                 <div>

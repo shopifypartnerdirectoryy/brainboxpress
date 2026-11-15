@@ -12,9 +12,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * BrainboxPress design system — editorial, premium publishing aesthetic.
- * Midnight navy (primary), champagne gold (accent), warm ivory + white (surfaces), charcoal (text).
- * All colours are oklch. Use the semantic utilities (bg-navy, text-gold, bg-ivory ...) in components.
+ * BrainboxPress design system — matched to the official logo.
+ * Deep navy #081C41 (primary identity), premium gold #D39914 (highlights, key buttons, accents),
+ * white (dominant background) and light grey #F5F6F8 (section separation).
+ * All colours are oklch. Use the semantic utilities (bg-navy, text-gold, bg-mist ...) in components.
  */
 
 @theme inline {
@@ -59,8 +60,8 @@
   --color-gold: var(--gold);
   --color-gold-deep: var(--gold-deep);
   --color-gold-soft: var(--gold-soft);
-  --color-ivory: var(--ivory);
-  --color-ivory-deep: var(--ivory-deep);
+  --color-mist: var(--mist);
+  --color-mist-deep: var(--mist-deep);
   --color-charcoal: var(--charcoal);
 
   --color-chart-1: var(--chart-1);
@@ -85,51 +86,51 @@
   --radius: 0.375rem;
 
   /* Brand */
-  --navy: oklch(0.231 0.045 259.6); /* #101D32 Midnight Navy */
-  --navy-soft: oklch(0.286 0.054 261.5); /* #1B2A45 */
-  --navy-foreground: oklch(0.968 0.01 87.5); /* ivory on navy */
-  --navy-muted: oklch(0.78 0.025 255); /* soft text on navy */
-  --gold: oklch(0.74 0.086 82); /* #C6A66B Champagne Gold */
-  --gold-deep: oklch(0.52 0.075 78); /* legible gold for small text on light surfaces */
-  --gold-soft: oklch(0.9 0.04 84);
-  --ivory: oklch(0.968 0.01 87.5); /* #F7F4ED Warm Ivory */
-  --ivory-deep: oklch(0.935 0.018 86.1); /* #EFE9DC */
-  --charcoal: oklch(0.264 0 0); /* #252525 */
+  --navy: oklch(0.236 0.075 261.3); /* #081C41 Deep Navy */
+  --navy-soft: oklch(0.292 0.094 263.7); /* #12285A */
+  --navy-foreground: oklch(1 0 0); /* white on navy */
+  --navy-muted: oklch(0.856 0.018 261.3); /* soft text on navy */
+  --gold: oklch(0.72 0.145 80.5); /* #D39914 Premium Gold */
+  --gold-deep: oklch(0.56 0.117 77.5); /* #9A6A00 — legible gold for text on white */
+  --gold-soft: oklch(0.8 0.125 83);
+  --mist: oklch(0.973 0.003 264.5); /* #F5F6F8 Light Grey */
+  --mist-deep: oklch(0.94 0.007 262);
+  --charcoal: oklch(0.27 0.025 262);
 
-  --background: var(--ivory);
+  --background: oklch(1 0 0);
   --foreground: var(--charcoal);
   --card: oklch(1 0 0);
   --card-foreground: var(--charcoal);
   --popover: oklch(1 0 0);
   --popover-foreground: var(--charcoal);
   --primary: var(--navy);
-  --primary-foreground: var(--ivory);
-  --secondary: var(--ivory-deep);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--mist-deep);
   --secondary-foreground: var(--navy);
-  --muted: var(--ivory-deep);
-  --muted-foreground: oklch(0.47 0.018 260);
+  --muted: var(--mist-deep);
+  --muted-foreground: oklch(0.46 0.025 262);
   --accent: var(--gold);
   --accent-foreground: var(--navy);
   --destructive: oklch(0.53 0.19 27);
   --destructive-foreground: oklch(0.98 0 0);
   --success: oklch(0.48 0.09 155);
-  --border: oklch(0.87 0.02 85);
-  --input: oklch(0.84 0.022 85);
+  --border: oklch(0.9 0.01 262);
+  --input: oklch(0.84 0.014 262);
   --ring: var(--gold);
 
-  --shadow-editorial-value: 0 30px 60px -30px oklch(0.231 0.045 259.6 / 0.35);
-  --shadow-lift-value: 0 18px 40px -22px oklch(0.231 0.045 259.6 / 0.4);
+  --shadow-editorial-value: 0 30px 60px -30px oklch(0.236 0.075 261.3 / 0.3);
+  --shadow-lift-value: 0 18px 40px -22px oklch(0.236 0.075 261.3 / 0.35);
 
   --chart-1: var(--navy);
   --chart-2: var(--gold);
   --chart-3: var(--gold-deep);
   --chart-4: var(--navy-soft);
-  --chart-5: var(--ivory-deep);
-  --sidebar: var(--ivory);
+  --chart-5: var(--mist-deep);
+  --sidebar: var(--mist);
   --sidebar-foreground: var(--charcoal);
   --sidebar-primary: var(--navy);
-  --sidebar-primary-foreground: var(--ivory);
-  --sidebar-accent: var(--ivory-deep);
+  --sidebar-primary-foreground: var(--mist);
+  --sidebar-accent: var(--mist-deep);
   --sidebar-accent-foreground: var(--navy);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--gold);
@@ -137,15 +138,15 @@
 
 .dark {
   --background: var(--navy);
-  --foreground: var(--ivory);
+  --foreground: var(--mist);
   --card: var(--navy-soft);
-  --card-foreground: var(--ivory);
+  --card-foreground: var(--mist);
   --popover: var(--navy-soft);
-  --popover-foreground: var(--ivory);
+  --popover-foreground: var(--mist);
   --primary: var(--gold);
   --primary-foreground: var(--navy);
   --secondary: var(--navy-soft);
-  --secondary-foreground: var(--ivory);
+  --secondary-foreground: var(--mist);
   --muted: var(--navy-soft);
   --muted-foreground: var(--navy-muted);
   --accent: var(--gold);
@@ -216,7 +217,7 @@
   text-transform: uppercase;
 }
 
-/* Thin champagne-gold hairline */
+/* Thin gold hairline */
 @utility gold-rule {
   display: inline-block;
   height: 1px;
@@ -224,11 +225,9 @@
   background-color: var(--color-gold);
 }
 
-/* Subtle paper grain for ivory sections */
+/* Light grey section surface for visual separation */
 @utility paper {
-  background-color: var(--color-ivory);
-  background-image: radial-gradient(oklch(0.231 0.045 259.6 / 0.035) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background-color: var(--color-mist);
 }
 
 /* Reveal-on-scroll animation (toggled by the Reveal component) */
@@ -241,21 +240,5 @@
     transition:
       opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
       transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@utility animate-marquee {
-  animation: marquee 48s linear infinite;
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
   }
 }

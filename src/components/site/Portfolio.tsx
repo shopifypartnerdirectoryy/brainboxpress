@@ -21,7 +21,7 @@ export function Portfolio() {
             }
             intro="Explore the types of creative promotional work and digital presentation services offered by BrainboxPress."
           />
-          <p className="flex max-w-sm items-start gap-3 border-l-2 border-gold bg-ivory px-5 py-4 text-sm leading-relaxed text-muted-foreground">
+          <p className="flex max-w-sm items-start gap-3 border-l-2 border-gold bg-mist px-5 py-4 text-sm leading-relaxed text-muted-foreground">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold-deep" aria-hidden="true" />
             The visuals below are demonstration pieces that illustrate each service category. They are not client
             projects.
@@ -35,6 +35,8 @@ export function Portfolio() {
                 <div className="relative overflow-hidden bg-navy">
                   <img
                     src={item.image}
+                    srcSet={`${item.imageSmall} 640w, ${item.image} 1200w`}
+                    sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
                     alt={item.alt}
                     width={1200}
                     height={912}
@@ -42,7 +44,7 @@ export function Portfolio() {
                     decoding="async"
                     className="aspect-[4/3] w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
                   />
-                  <span className="absolute left-4 top-4 bg-ivory/95 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-navy backdrop-blur">
+                  <span className="absolute left-4 top-4 bg-mist/95 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-navy backdrop-blur">
                     {PORTFOLIO_LABELS[item.kind]}
                   </span>
                 </div>

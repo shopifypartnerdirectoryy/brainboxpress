@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { useEnquiry } from "./enquiry-context";
 
-export function SocialPackageCard({ pkg }: { pkg: SocialPackage }) {
+export function SocialPackageCard({ pkg, headingAs: Heading = "h4" }: { pkg: SocialPackage; headingAs?: "h3" | "h4" }) {
   const { requestService } = useEnquiry();
   const featured = !!pkg.emphasis;
   const headingId = `smm-${pkg.packageId}`;
@@ -28,9 +28,9 @@ export function SocialPackageCard({ pkg }: { pkg: SocialPackage }) {
       )}
     >
       <p className="eyebrow text-gold">Package</p>
-      <h4 id={headingId} className="mt-2 text-4xl">
+      <Heading id={headingId} className="mt-2 text-4xl">
         {pkg.name}
-      </h4>
+      </Heading>
       <p className="mt-6 flex items-baseline gap-2">
         <span className="font-serif text-6xl leading-none">{formatPrice(pkg.price)}</span>
         <span className="text-sm text-navy-muted">/ {pkg.durationDays} days</span>
@@ -53,7 +53,7 @@ export function SocialPackageCard({ pkg }: { pkg: SocialPackage }) {
 
       <Button
         type="button"
-        variant={featured ? "gold" : "outlineIvory"}
+        variant={featured ? "gold" : "outlineLight"}
         size="xl"
         className="mt-8 w-full"
         onClick={() => requestService("social-media-management", pkg.packageId)}

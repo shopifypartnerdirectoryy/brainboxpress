@@ -1,157 +1,349 @@
 // Single source of truth for BrainboxPress services, packages and prices.
-// Prices and quantities come from the approved brief — do not change, discount or add to them.
+// Prices, durations and quantities are the latest approved figures — do not change, discount or add to them.
 
 export type ServiceId =
-  | "tiktok-instagram-feature"
+  | "tiktok-book-feature"
+  | "instagram-book-feature"
   | "book-trailer"
-  | "book-mockup"
   | "social-media-management"
+  | "email-marketing"
+  | "book-mockup"
+  | "audiobook"
   | "website-design"
   | "website-redesign"
   | "goodreads-listopia"
   | "book-challenge";
 
+export type ServiceCategory = "visibility" | "presence" | "reach";
+
 export interface ServicePackage {
   id: string;
-  /** Label shown in the enquiry form, e.g. "Basic — 7 Days — $45" */
-  formLabel: string;
-  /** Short label shown on the service card, e.g. "15-second book trailer" */
+  /** Short package name shown on cards, e.g. "Basic" or "2 Lists" */
   name: string;
-  price: number;
+  /** What the package is, e.g. "15-second book trailer" */
+  detail?: string;
+  /** Label shown in the enquiry form, e.g. "Basic — 15 Seconds — $65" */
+  formLabel: string;
+  /** Omitted only for open-ended options priced by a stated rate. */
+  price?: number;
 }
 
 export interface Service {
   id: ServiceId;
+  /** URL segment of the service page: /services/<slug> */
+  slug: string;
   number: string;
   title: string;
+  category: ServiceCategory;
   /** Label used in the enquiry form dropdown */
   formLabel: string;
+  /** One-sentence summary for overviews and the pricing table */
+  summary: string;
   description: string[];
-  /** Single price (when the service has no packages) */
+  /** Approved inclusions. Only list what has been approved — never invent deliverables. */
+  inclusions?: string[];
+  /** Single or per-unit price */
   price?: number;
-  /** Qualifier shown next to a single price, e.g. "registration fee" */
-  priceQualifier?: string;
+  /** Unit shown after a price, e.g. "per book" */
+  priceUnit?: string;
+  /** Set when the service is priced by custom quote; explains the basis */
+  quoteBasis?: string;
   packages?: ServicePackage[];
   cta: string;
-  /** Honest-results note shown on the card */
+  /** Honest-results note shown with the service */
   note?: string;
+  /** Hint shown in the enquiry message box when this service is selected */
+  messageHint?: string;
+  seo: { title: string; description: string };
+}
+
+export const EMAIL_MARKETING_RATE = 0.5;
+export const EMAIL_MARKETING_EXAMPLES = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000];
+
+const fmtCount = (n: number) => n.toLocaleString("en-US");
+
+export function formatPrice(price: number) {
+  return Number.isInteger(price)
+    ? `$${price.toLocaleString("en-US")}`
+    : `$${price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+export function emailMarketingPrice(contacts: number) {
+  return Math.round(contacts * EMAIL_MARKETING_RATE * 100) / 100;
 }
 
 export const SERVICES: Service[] = [
   {
-    id: "tiktok-instagram-feature",
+    id: "tiktok-book-feature",
+    slug: "tiktok-book-promotion",
     number: "01",
-    title: "TikTok / Instagram Book Feature",
-    formLabel: "TikTok / Instagram Book Feature",
+    title: "TikTok Book Feature",
+    category: "visibility",
+    formLabel: "TikTok Book Feature — $25 per book",
+    summary: "A paid TikTok feature that presents your book, its story and a direct link to TikTok audiences.",
     description: [
-      "A social media book feature designed to introduce books to TikTok and Instagram audiences, showcase their stories and support book discoverability.",
-      "The feature provides authors with an opportunity to present their books through engaging promotional content and direct interested audiences towards their titles.",
+      "A paid TikTok book feature that introduces your book to TikTok audiences through an engaging presentation of its cover, story and author.",
+      "Proposed wording is shared with you for review and approval, and every feature closes with a clean end screen and a direct link to your book.",
     ],
-    price: 20,
-    priceQualifier: "registration fee",
-    cta: "Enquire About This Service",
-    note: "The $20 is a registration fee for the feature. Views, sales and reader numbers are not guaranteed.",
+    inclusions: [
+      "Book cover, title and author presentation",
+      "Two to three story highlights",
+      "Engaging presentation of the book",
+      "Direct book link",
+      "Proposed wording for author review and approval",
+      "Clean closing screen",
+    ],
+    price: 25,
+    priceUnit: "per book",
+    cta: "Book a TikTok Feature",
+    note: "A single book feature — not a social media management campaign. Views, sales and reader numbers are not guaranteed.",
+    seo: {
+      title: "TikTok Book Promotion — $25 Book Feature | BrainboxPress",
+      description:
+        "Promote your book on TikTok with a BrainboxPress book feature: cover, title and author presentation, story highlights, a direct book link and author approval. $25 per book.",
+    },
+  },
+  {
+    id: "instagram-book-feature",
+    slug: "instagram-book-promotion",
+    number: "02",
+    title: "Instagram Book Feature",
+    category: "visibility",
+    formLabel: "Instagram Book Feature — $35 per book",
+    summary: "A separate book feature prepared specifically for Instagram audiences.",
+    description: [
+      "A dedicated book feature prepared specifically for Instagram, presenting your book to Instagram audiences in a polished format suited to the platform.",
+      "It is booked and priced separately from the TikTok Book Feature, so you can choose the platform that best suits your readers — or feature your book on both.",
+    ],
+    price: 35,
+    priceUnit: "per book",
+    cta: "Book an Instagram Feature",
+    note: "Separate from the TikTok Book Feature. Views, sales and reader numbers are not guaranteed.",
+    seo: {
+      title: "Instagram Book Promotion — $35 Book Feature | BrainboxPress",
+      description:
+        "Introduce your book to Instagram readers with a dedicated BrainboxPress Instagram book feature, prepared separately from our TikTok feature. $35 per book.",
+    },
   },
   {
     id: "book-trailer",
-    number: "02",
+    slug: "book-trailers",
+    number: "03",
     title: "Book Trailer Creation",
+    category: "visibility",
     formLabel: "Book Trailer Creation",
+    summary: "Creative video trailers in 15-second, 30-second and 60-second (1-minute) formats.",
     description: [
       "Creative video trailers designed to present a book's identity, storyline and atmosphere through engaging visual storytelling.",
       "Each trailer is developed to give readers a visual introduction to the book and its distinctive appeal.",
     ],
     packages: [
-      { id: "trailer-15s", name: "15-second book trailer", formLabel: "15 Seconds — $95", price: 95 },
-      { id: "trailer-45s", name: "45-second book trailer", formLabel: "45 Seconds — $145", price: 145 },
-      { id: "trailer-2m", name: "2-minute book trailer", formLabel: "2 Minutes — $350", price: 350 },
+      { id: "trailer-basic", name: "Basic", detail: "15-second book trailer", formLabel: "Basic — 15 Seconds — $65", price: 65 },
+      { id: "trailer-standard", name: "Standard", detail: "30-second book trailer", formLabel: "Standard — 30 Seconds — $125", price: 125 },
+      {
+        id: "trailer-premium",
+        name: "Premium",
+        detail: "60-second (1-minute) book trailer",
+        formLabel: "Premium — 60 Seconds (1 Minute) — $265",
+        price: 265,
+      },
     ],
     cta: "Request a Book Trailer",
+    seo: {
+      title: "Book Trailer Services — 15, 30 & 60 Seconds | BrainboxPress",
+      description:
+        "Professional book trailers that present your story's identity and atmosphere. Basic 15 seconds $65, Standard 30 seconds $125, Premium 60 seconds (1 minute) $265.",
+    },
+  },
+  {
+    id: "social-media-management",
+    slug: "author-social-media-management",
+    number: "04",
+    title: "Social Media Management",
+    category: "presence",
+    formLabel: "Social Media Management",
+    summary: "Structured static posts and reels over 7, 14 or 30 days.",
+    description: [
+      "BrainboxPress provides structured social media content management designed to help authors maintain an engaging, consistent and professional online presence.",
+      "Each package combines professionally prepared static posts and short-form video content to showcase books, strengthen author branding and support audience engagement.",
+    ],
+    packages: [
+      { id: "smm-basic", name: "Basic", detail: "7 days · 6 static posts · 4 reels", formLabel: "Basic — 7 Days — $45", price: 45 },
+      { id: "smm-standard", name: "Standard", detail: "14 days · 12 static posts · 8 reels", formLabel: "Standard — 14 Days — $85", price: 85 },
+      { id: "smm-premium", name: "Premium", detail: "30 days · 21 static posts · 9 reels", formLabel: "Premium — 30 Days — $155", price: 155 },
+    ],
+    cta: "Choose a Package",
+    seo: {
+      title: "Author Social Media Management — From $45 | BrainboxPress",
+      description:
+        "Social media management for authors: static posts and reels over 7, 14 or 30 days. Basic $45, Standard $85, Premium $155 — clear deliverables, no hidden extras.",
+    },
+  },
+  {
+    id: "email-marketing",
+    slug: "email-marketing-for-authors",
+    number: "05",
+    title: "Email Marketing",
+    category: "reach",
+    formLabel: "Email Marketing — $0.50 per contact",
+    summary: "Email marketing for authors, priced transparently at $0.50 per contact.",
+    description: [
+      "Email marketing for authors who want to introduce their book to readers by email, with pricing that is simple to understand.",
+      "Every campaign is priced at $0.50 per contact. Choose the number of contacts that suits your goals and we'll discuss your book and campaign with you by email.",
+    ],
+    price: EMAIL_MARKETING_RATE,
+    priceUnit: "per contact",
+    packages: [
+      ...EMAIL_MARKETING_EXAMPLES.map((n) => ({
+        id: `email-${n}`,
+        name: `${fmtCount(n)} contacts`,
+        formLabel: `${fmtCount(n)} Contacts — ${formatPrice(emailMarketingPrice(n))}`,
+        price: emailMarketingPrice(n),
+      })),
+      { id: "email-other", name: "Another quantity", detail: "$0.50 per contact", formLabel: "Another quantity — $0.50 per contact" },
+    ],
+    cta: "Enquire About Email Marketing",
+    note: "Opens, clicks, reviews and sales are not guaranteed.",
+    messageHint: "Tell us about your book and how many contacts you'd like to reach.",
+    seo: {
+      title: "Email Marketing for Authors — $0.50 per Contact | BrainboxPress",
+      description:
+        "Email marketing for authors at a transparent $0.50 per contact — 1,000 contacts $500, 5,000 contacts $2,500, 10,000 contacts $5,000. Enquire with BrainboxPress.",
+    },
   },
   {
     id: "book-mockup",
-    number: "03",
+    slug: "3d-book-mockups",
+    number: "06",
     title: "Book Mockup Design",
-    formLabel: "Book Mockup Design",
+    category: "visibility",
+    formLabel: "Book Mockup Design — $75",
+    summary: "Polished 3D mockups that present your book cover professionally.",
     description: [
       "Professional 3D book mockup presentations designed to showcase book covers through attractive, polished visual displays.",
       "Create an elegant presentation of your book for websites, social media, promotional campaigns and author branding.",
     ],
     price: 75,
     cta: "Order a Book Mockup",
+    seo: {
+      title: "3D Book Mockup Design — $75 | BrainboxPress",
+      description:
+        "Professional 3D book mockups that showcase your cover for websites, social media, promotional campaigns and author branding. $75 from BrainboxPress.",
+    },
   },
   {
-    id: "social-media-management",
-    number: "04",
-    title: "Social Media Management",
-    formLabel: "Social Media Management",
+    id: "audiobook",
+    slug: "audiobook-services",
+    number: "07",
+    title: "Audiobook Services",
+    category: "reach",
+    formLabel: "Audiobook Services — custom quote",
+    summary: "Audiobook services priced according to the number of pages in your book.",
     description: [
-      "BrainboxPress provides structured social media content management designed to help authors maintain an engaging, consistent and professional online presence.",
-      "Each package combines professionally prepared static posts and short-form video content to showcase books, strengthen author branding and support audience engagement.",
+      "Audiobook services for authors who want to bring their book to listeners in audio format.",
+      "Pricing is based on the number of pages in your book. Share your page count with us and we'll prepare a custom quote.",
     ],
-    packages: [
-      { id: "smm-basic", name: "Basic", formLabel: "Basic — 7 Days — $45", price: 45 },
-      { id: "smm-standard", name: "Standard", formLabel: "Standard — 14 Days — $85", price: 85 },
-      { id: "smm-premium", name: "Premium", formLabel: "Premium — 30 Days — $155", price: 155 },
-    ],
-    cta: "Choose a Package",
+    quoteBasis: "Priced by page count",
+    cta: "Request a Custom Quote",
+    messageHint: "Please include your book's page count, genre and anything else we should know.",
+    seo: {
+      title: "Audiobook Services for Authors — Custom Quotes | BrainboxPress",
+      description:
+        "Audiobook services for authors, priced by the number of pages in your book. Share your page count with BrainboxPress and request a custom quote.",
+    },
   },
   {
     id: "website-design",
-    number: "05",
+    slug: "author-website-design",
+    number: "08",
     title: "Website Design",
-    formLabel: "Website Design",
+    category: "presence",
+    formLabel: "Website Design — $845",
+    summary: "A custom author website to showcase your books and author identity.",
     description: [
       "Professional custom website creation for authors who want a polished online presence to showcase their books, author identity and writing projects.",
       "Designed with an emphasis on elegant presentation, responsive layouts, user experience and professional author branding.",
     ],
     price: 845,
     cta: "Request Website Design",
+    seo: {
+      title: "Author Website Design — $845 | BrainboxPress",
+      description:
+        "Custom author website design with elegant presentation, responsive layouts and professional author branding to showcase your books. $845 from BrainboxPress.",
+    },
   },
   {
     id: "website-redesign",
-    number: "06",
+    slug: "author-website-redesign",
+    number: "09",
     title: "Website Redesign",
-    formLabel: "Website Redesign",
+    category: "presence",
+    formLabel: "Website Redesign — $455",
+    summary: "A refreshed, more polished version of your existing author website.",
     description: [
       "Website redesign services focused on improving the visual appearance, structure, user experience and overall presentation of an existing author website.",
       "Transform an existing website into a more polished, organized and professional online presence.",
     ],
     price: 455,
     cta: "Request Website Redesign",
+    seo: {
+      title: "Author Website Redesign — $455 | BrainboxPress",
+      description:
+        "Redesign your existing author website with improved visuals, structure and user experience for a more polished, professional online presence. $455.",
+    },
   },
   {
     id: "goodreads-listopia",
-    number: "07",
+    slug: "goodreads-listopia-placement",
+    number: "10",
     title: "Goodreads Listopia Placement",
+    category: "reach",
     formLabel: "Goodreads Listopia Placement",
+    summary: "Relevant Goodreads Listopia opportunities matched to your book's genre and themes.",
     description: [
       "Relevant Goodreads Listopia placement opportunities based on book genres, themes and reader interests.",
       "The service focuses on identifying relevant book-list opportunities that align with the identity and subject of each title.",
     ],
     packages: [
-      { id: "listopia-2", name: "2 Listopia Lists", formLabel: "2 Lists — $95", price: 95 },
-      { id: "listopia-5", name: "5 Listopia Lists", formLabel: "5 Lists — $145", price: 145 },
-      { id: "listopia-10", name: "10 Listopia Lists", formLabel: "10 Lists — $357", price: 357 },
+      { id: "listopia-2", name: "2 Lists", detail: "2 Listopia lists", formLabel: "2 Lists — $95", price: 95 },
+      { id: "listopia-5", name: "5 Lists", detail: "5 Listopia lists", formLabel: "5 Lists — $145", price: 145 },
+      { id: "listopia-10", name: "10 Lists", detail: "10 Listopia lists", formLabel: "10 Lists — $357", price: 357 },
     ],
     cta: "Explore Goodreads Promotion",
     note: "Placement, rankings, votes and sales are not guaranteed.",
+    seo: {
+      title: "Goodreads Listopia Placement — From $95 | BrainboxPress",
+      description:
+        "Goodreads Listopia placement opportunities matched to your book's genre and themes: 2 lists $95, 5 lists $145, 10 lists $357. Results are not guaranteed.",
+    },
   },
   {
     id: "book-challenge",
-    number: "08",
+    slug: "book-challenge",
+    number: "11",
     title: "Book Challenge",
+    category: "reach",
     formLabel: "Book Challenge",
+    summary: "A reader-focused promotional challenge for featured titles.",
     description: [
       "A book-focused promotional challenge designed to encourage reader awareness, engagement and interest in featured titles.",
       "A creative promotional opportunity for authors seeking additional ways to introduce their books to readers.",
     ],
-    price: 75,
+    packages: [
+      { id: "challenge-basic", name: "Basic", formLabel: "Basic — $150", price: 150 },
+      { id: "challenge-standard", name: "Standard", formLabel: "Standard — $275", price: 275 },
+      { id: "challenge-premium", name: "Premium", formLabel: "Premium — $395", price: 395 },
+    ],
     cta: "Enquire About Book Challenges",
+    seo: {
+      title: "Book Challenge Promotion — From $150 | BrainboxPress",
+      description:
+        "A book-focused promotional challenge that encourages reader awareness and engagement. Basic $150, Standard $275, Premium $395 from BrainboxPress.",
+    },
   },
 ];
 
-/** Social Media Management package details (deliverables are fixed by the brief). */
+/** Social Media Management package details (deliverables are fixed). */
 export interface SocialPackage {
   packageId: string;
   name: string;
@@ -178,6 +370,8 @@ export const SOCIAL_MEDIA_PACKAGES: SocialPackage[] = [
   { packageId: "smm-premium", name: "Premium", price: 155, durationDays: 30, staticPosts: 21, reels: 9, cta: "Choose Premium" },
 ];
 
+export const FEATURED_SERVICE_IDS: ServiceId[] = ["tiktok-book-feature", "book-trailer", "social-media-management"];
+
 export function totalContentPieces(p: Pick<SocialPackage, "staticPosts" | "reels">) {
   return p.staticPosts + p.reels;
 }
@@ -186,10 +380,24 @@ export function getService(id: string): Service | undefined {
   return SERVICES.find((s) => s.id === id);
 }
 
+export function getServiceBySlug(slug: string): Service | undefined {
+  return SERVICES.find((s) => s.slug === slug);
+}
+
 export function getPackage(serviceId: string, packageId: string): ServicePackage | undefined {
   return getService(serviceId)?.packages?.find((p) => p.id === packageId);
 }
 
-export function formatPrice(price: number) {
-  return `$${price.toLocaleString("en-US")}`;
+/** Lowest listed package price, used for "From $X" summaries. */
+function lowestPackagePrice(s: Service) {
+  const prices = (s.packages ?? []).map((p) => p.price).filter((p): p is number => typeof p === "number");
+  return prices.length ? Math.min(...prices) : undefined;
+}
+
+/** Short, consistent price summary, e.g. "$25 per book", "From $65", "$0.50 per contact", "Custom quote". */
+export function priceSummary(s: Service): string {
+  if (s.quoteBasis) return "Custom quote";
+  if (typeof s.price === "number") return s.priceUnit ? `${formatPrice(s.price)} ${s.priceUnit}` : formatPrice(s.price);
+  const from = lowestPackagePrice(s);
+  return from !== undefined ? `From ${formatPrice(from)}` : "Request a quote";
 }
