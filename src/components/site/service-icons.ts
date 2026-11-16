@@ -10,6 +10,11 @@ import {
   PenTool,
   Smartphone,
   CalendarDays,
+  BookOpenCheck,
+  Palette,
+  AlignLeft,
+  Rocket,
+  BadgeCheck,
   type LucideIcon,
 } from "lucide-react";
 
@@ -27,4 +32,9 @@ export const SERVICE_ICONS: Record<ServiceId, LucideIcon> = {
   "website-redesign": PenTool,
   "goodreads-listopia": Library,
   "book-challenge": Flag,
+  "amazon-kdp-optimization": BookOpenCheck,
+  "book-cover-design": Palette,
+  "book-formatting": AlignLeft,
+  "book-launch-campaign": Rocket,
+  "author-branding": BadgeCheck,
 };

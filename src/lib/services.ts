@@ -12,7 +12,12 @@ export type ServiceId =
   | "website-design"
   | "website-redesign"
   | "goodreads-listopia"
-  | "book-challenge";
+  | "book-challenge"
+  | "amazon-kdp-optimization"
+  | "book-cover-design"
+  | "book-formatting"
+  | "book-launch-campaign"
+  | "author-branding";
 
 export type ServiceCategory = "visibility" | "presence" | "reach";
 
@@ -52,6 +57,13 @@ export interface Service {
   cta: string;
   /** Honest-results note shown with the service */
   note?: string;
+  /**
+   * Areas a quotation can cover, for quote-based services. Unlike `inclusions`, these are not a fixed
+   * package: the exact scope is agreed in writing before work begins.
+   */
+  scope?: string[];
+  /** Who the service is for */
+  audience?: string;
   /** Hint shown in the enquiry message box when this service is selected */
   messageHint?: string;
   seo: { title: string; description: string };
@@ -339,6 +351,156 @@ export const SERVICES: Service[] = [
       title: "Book Challenge Promotion — From $150 | BrainboxPress",
       description:
         "A book-focused promotional challenge that encourages reader awareness and engagement. Basic $150, Standard $275, Premium $395 from BrainboxPress.",
+    },
+  },
+  {
+    id: "amazon-kdp-optimization",
+    slug: "amazon-kdp-optimization",
+    number: "12",
+    title: "Amazon KDP Optimization",
+    category: "visibility",
+    formLabel: "Amazon KDP Optimization — request a quote",
+    summary: "A review and refresh of your Amazon book listing so readers can find and understand your book.",
+    description: [
+      "Your Amazon listing is often the first place a reader meets your book. We review how it is presented — description, keywords, categories, metadata and author information — and recommend or implement clearer, better-targeted improvements.",
+      "The aim is a listing that accurately represents your book and gives it better discoverability opportunities within Amazon's own guidelines.",
+    ],
+    scope: [
+      "Book description and blurb review",
+      "Keyword research for your seven KDP keyword slots",
+      "Category research",
+      "Metadata, title and subtitle presentation review",
+      "Amazon Author Central profile setup or review",
+      "A+ Content design (where your account is eligible)",
+    ],
+    audience: "Self-published authors with a book on Amazon KDP, or preparing to publish there.",
+    quoteBasis: "Quoted after reviewing your listing",
+    cta: "Request a Quote",
+    note: "Amazon rankings, visibility and sales are not guaranteed. Changes follow Amazon's current KDP guidelines.",
+    messageHint: "Please include your Amazon book link (or publishing date) and what you'd most like to improve.",
+    seo: {
+      title: "Amazon KDP Optimization for Authors | BrainboxPress",
+      description:
+        "Amazon KDP listing optimization for self-published authors: book description, keyword and category research, metadata, Author Central and A+ Content. Request a quote.",
+    },
+  },
+  {
+    id: "book-cover-design",
+    slug: "book-cover-design",
+    number: "13",
+    title: "Book Cover Design",
+    category: "visibility",
+    formLabel: "Book Cover Design — request a quote",
+    summary: "Professional eBook, paperback and hardcover covers designed for your genre and readers.",
+    description: [
+      "A cover tells readers what kind of book they're looking at in a moment. We design covers that suit your genre, read clearly at thumbnail size and reflect the tone of your story.",
+      "eBook fronts and full print wraps (front, spine and back) are prepared to your printer's or platform's specifications once your page count and trim size are confirmed.",
+    ],
+    scope: [
+      "eBook cover design",
+      "Paperback full-wrap cover (front, spine and back)",
+      "Hardcover case or dust-jacket cover",
+      "Cover concepts for your review and approval",
+      "Print-ready files to your platform's specifications",
+    ],
+    audience: "Authors preparing a new book, a new edition, or a refreshed cover for an existing title.",
+    quoteBasis: "Quoted by format and requirements",
+    cta: "Request a Quote",
+    note: "Stock images, fonts or illustrations that need separate licences are disclosed in your quotation.",
+    messageHint: "Tell us your genre, formats needed (eBook, paperback, hardcover), trim size and page count if known.",
+    seo: {
+      title: "Book Cover Design — eBook, Paperback & Hardcover | BrainboxPress",
+      description:
+        "Professional book cover design for eBook, paperback and hardcover editions, created for your genre with print-ready files. Request a custom quote from BrainboxPress.",
+    },
+  },
+  {
+    id: "book-formatting",
+    slug: "book-formatting",
+    number: "14",
+    title: "Book Formatting",
+    category: "visibility",
+    formLabel: "Book Formatting — request a quote",
+    summary: "Clean, readable interior formatting for eBook, paperback and hardcover editions.",
+    description: [
+      "Good formatting is invisible to readers — it simply makes the book easy and pleasant to read. We prepare your manuscript's interior so it displays correctly on e-readers and prints cleanly.",
+      "Each edition is formatted to the requirements of the platform you're publishing with, and you review the files before they're finalised.",
+    ],
+    scope: [
+      "eBook formatting (reflowable files for e-readers)",
+      "Paperback interior formatting",
+      "Hardcover interior formatting",
+      "Chapter headings, front and back matter layout",
+      "Files prepared to your platform's specifications",
+    ],
+    audience: "Authors with a finished, edited manuscript who are ready to publish.",
+    quoteBasis: "Quoted by word count, formats and layout complexity",
+    cta: "Request a Quote",
+    messageHint: "Please share your approximate word count, the formats you need and any images, tables or special layouts.",
+    seo: {
+      title: "Book Formatting Services — eBook & Print | BrainboxPress",
+      description:
+        "Book formatting for eBook, paperback and hardcover editions: clean interiors, front and back matter, and platform-ready files. Request a quote from BrainboxPress.",
+    },
+  },
+  {
+    id: "book-launch-campaign",
+    slug: "book-launch-campaigns",
+    number: "15",
+    title: "Book Launch Campaigns",
+    category: "reach",
+    formLabel: "Book Launch Campaigns — request a quote",
+    summary: "A planned, coordinated campaign to introduce a new — or relaunched — book to readers.",
+    description: [
+      "A single book feature introduces your book once; a launch campaign plans several coordinated activities around your release date so your book has a clear, sustained introduction to readers.",
+      "We agree a plan with you that can combine services such as book features, a trailer, social media content, email outreach and listing preparation, with a clear timeline and budget.",
+    ],
+    scope: [
+      "Launch plan and timeline",
+      "Pre-launch listing and presentation review",
+      "Promotional graphics and short-form video",
+      "Social media and book feature scheduling",
+      "Reader outreach and advance reader copy coordination",
+      "Relaunch campaigns for existing books",
+    ],
+    audience: "Authors with an upcoming release, or an existing book that deserves a fresh introduction.",
+    quoteBasis: "Quoted from the agreed campaign plan",
+    cta: "Request a Quote",
+    note: "Advertising spend and paid placements are not included unless stated in your quotation. Sales, rankings and bestseller status are not guaranteed.",
+    messageHint: "Tell us your launch date (or current publishing status), genre and what you'd like the campaign to include.",
+    seo: {
+      title: "Book Launch Campaigns & Relaunches | BrainboxPress",
+      description:
+        "Planned book launch and relaunch campaigns for authors, combining features, trailers, social content and reader outreach on a clear timeline. Request a quote.",
+    },
+  },
+  {
+    id: "author-branding",
+    slug: "author-branding",
+    number: "16",
+    title: "Author Branding",
+    category: "presence",
+    formLabel: "Author Branding — request a quote",
+    summary: "A consistent author identity across your books, website and social profiles.",
+    description: [
+      "Readers remember authors whose presentation is consistent and recognisable. We help you define a clear author identity and apply it across the places readers find you.",
+      "Work can range from a logo and visual style to your author biography, media kit and social media profiles — agreed with you in a written scope.",
+    ],
+    scope: [
+      "Author brand identity and visual style",
+      "Author logo design",
+      "Author biography development",
+      "Author media kit and press kit",
+      "Social media profile optimization and branding",
+      "Book series branding",
+    ],
+    audience: "Authors building a long-term presence, launching a series, or refreshing an inconsistent online image.",
+    quoteBasis: "Quoted by scope",
+    cta: "Request a Quote",
+    seo: {
+      title: "Author Branding Services — Logo, Bio & Media Kit | BrainboxPress",
+      description:
+        "Author branding services: brand identity, author logo, biography, media kit and social profile branding for a consistent, recognisable author presence. Request a quote.",
     },
   },
 ];

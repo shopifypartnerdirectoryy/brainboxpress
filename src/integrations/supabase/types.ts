@@ -16,40 +16,70 @@ export type Database = {
     Tables: {
       author_enquiries: {
         Row: {
-          author_name: string
+          author_name: string | null
+          book_link: string | null
           book_title: string
+          budget: string | null
           client_request_id: string
           created_at: string
           email: string
+          enquiry_type: string
+          follow_up_notes: string | null
           full_name: string
+          genre: string | null
           id: string
           message: string
           package: string | null
+          phone: string | null
+          preferred_contact: string | null
+          publishing_stage: string | null
           service: string
+          status: string
+          updated_at: string
         }
         Insert: {
-          author_name: string
+          author_name?: string | null
+          book_link?: string | null
           book_title: string
+          budget?: string | null
           client_request_id: string
           created_at?: string
           email: string
+          enquiry_type?: string
+          follow_up_notes?: string | null
           full_name: string
+          genre?: string | null
           id?: string
           message: string
           package?: string | null
+          phone?: string | null
+          preferred_contact?: string | null
+          publishing_stage?: string | null
           service: string
+          status?: string
+          updated_at?: string
         }
         Update: {
-          author_name?: string
+          author_name?: string | null
+          book_link?: string | null
           book_title?: string
+          budget?: string | null
           client_request_id?: string
           created_at?: string
           email?: string
+          enquiry_type?: string
+          follow_up_notes?: string | null
           full_name?: string
+          genre?: string | null
           id?: string
           message?: string
           package?: string | null
+          phone?: string | null
+          preferred_contact?: string | null
+          publishing_stage?: string | null
           service?: string
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
