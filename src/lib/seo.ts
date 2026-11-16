@@ -119,3 +119,43 @@ export function servicePageSchema(s: Service) {
     ],
   };
 }
+
+/** Standard head() block for a content page: unique title/description, canonical, Open Graph and Twitter tags. */
+export function pageHead({
+  title,
+  description,
+  path,
+  type = "website",
+  schema,
+}: {
+  title: string;
+  description: string;
+  /** Path beginning with "/", e.g. "/services" */
+  path: string;
+  type?: "website" | "article";
+  schema?: object;
+}) {
+  const url = `${PUBLIC_ORIGIN}${path}`;
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: type },
+      { property: "og:url", content: url },
+      { property: "og:image", content: SITE.ogImage },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: `${SITE.name} logo — ${SITE.tagline}` },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: SITE.ogImage },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    ...(schema ? { scripts: [{ type: "application/ld+json", children: JSON.stringify(schema) }] } : {}),
+  };
+}
+
+export { ORG_ID };
