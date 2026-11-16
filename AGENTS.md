@@ -33,7 +33,8 @@ use the editor.
 
 - Services, packages and prices live only in `src/lib/services.ts`; components, the enquiry form, JSON-LD and tests read from it so prices never drift. `src/test/services.test.ts` locks the values.
 - Official contact details and social URLs live in `src/lib/site.ts`; never hardcode them elsewhere.
-- The site is one scrolling page (`src/routes/index.tsx`) composed from `src/components/site/*`, because the brief asks for nav links that smooth-scroll to sections.
-- Service buttons preselect the enquiry form through `EnquiryProvider` (`src/components/site/enquiry-context.tsx`), so the selection survives scrolling to the contact section.
-- Enquiries are submitted via the `submitEnquiry` server function into the locked `author_enquiries` table (no public policies; inserted server-side after zod validation, honeypot and min-fill-time checks; `client_request_id` is unique to absorb duplicate submits).
+- The homepage (`src/routes/index.tsx`) is one scrolling page composed from `src/components/site/*` (nav links scroll to sections); each service also has its own SEO page at `src/routes/services.$slug.tsx`, driven by the service's `slug` and `seo` fields.
+- Service buttons preselect the enquiry form through `EnquiryProvider` (`src/components/site/enquiry-context.tsx`): on the homepage it scrolls to the form; on service pages it navigates to `/?service=&package=`, which the homepage applies on load. There is only one enquiry form.
+- Enquiries go through the `submitEnquiry` server function: saved to the locked `author_enquiries` table as a backup (no public policies; `client_request_id` unique to absorb duplicates), then forwarded server-side to Static Forms with `STATIC_FORMS_API_KEY` (payload built in `src/lib/static-forms.ts`). The visitor sees an error only if both fail.
+- Canonical/og:url and the sitemap use `PUBLIC_ORIGIN` in `src/lib/seo.ts`; `public/sitemap.xml` must list every service page (a test enforces it).
 - Portfolio entries live in `src/lib/portfolio.ts` with a `kind` label so demonstration visuals are never shown as client work; add real projects with `kind: "client"`.

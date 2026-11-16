@@ -48,7 +48,7 @@ export function PricingHighlights() {
             {SERVICES.map((s) => {
               const details = pricingDetail(s);
               return (
-                <li key={s.id} className="grid gap-4 px-5 py-6 sm:px-8 md:grid-cols-[1.1fr_1.4fr_auto] md:items-center md:gap-8">
+                <li key={s.id} className="grid gap-4 px-5 py-6 sm:px-8 md:grid-cols-[1fr_1.4fr_16rem] md:items-center md:gap-8">
                   <div>
                     <Link
                       to="/services/$slug"

@@ -305,9 +305,9 @@ export const SERVICES: Service[] = [
       "The service focuses on identifying relevant book-list opportunities that align with the identity and subject of each title.",
     ],
     packages: [
-      { id: "listopia-2", name: "2 Lists", detail: "2 Listopia lists", formLabel: "2 Lists — $95", price: 95 },
-      { id: "listopia-5", name: "5 Lists", detail: "5 Listopia lists", formLabel: "5 Lists — $145", price: 145 },
-      { id: "listopia-10", name: "10 Lists", detail: "10 Listopia lists", formLabel: "10 Lists — $357", price: 357 },
+      { id: "listopia-2", name: "2 Lists", formLabel: "2 Lists — $95", price: 95 },
+      { id: "listopia-5", name: "5 Lists", formLabel: "5 Lists — $145", price: 145 },
+      { id: "listopia-10", name: "10 Lists", formLabel: "10 Lists — $357", price: 357 },
     ],
     cta: "Explore Goodreads Promotion",
     note: "Placement, rankings, votes and sales are not guaranteed.",
