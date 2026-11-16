@@ -11,6 +11,18 @@
 - [x] Visitor auto-acknowledgement: explained (Static Forms auto-reply is Starter plan+; Resend alternative needs account + verified domain)
 - [x] Performance (responsive images), mobile/desktop checks, tests
 
+## Form fix (Nov 16)
+- [x] Live form: Static Forms was rejecting live-site submissions (403); fixed, published, live test accepted — owner to confirm inbox
+
+## Master revamp brief (Nov 16 upload) — waiting on owner answers before building
+- [ ] Which proposed services are Active / Partner-coordinated / Planned (six departments)
+- [ ] New homepage structure (new hero headline, 5-stage journey, testimonials empty state, final CTA)
+- [ ] Services overview page + priority service pages
+- [ ] Book Visibility Assessment form
+- [ ] Legal pages (Privacy, Terms, Refund & Cancellation) — needs owner's payment/refund/revision terms
+- [ ] Author resources / blog structure
+- [ ] Enquiry status tracking (lead management) + analytics
+
 ## Waiting on the owner
 - [ ] Connect brainboxworld.net to this project (it currently shows another deployment), then switch PUBLIC_ORIGIN in src/lib/seo.ts and the sitemap/robots to it
 - [ ] Choose visitor auto-reply route (Static Forms paid plan, or Resend free tier with a verified domain)
