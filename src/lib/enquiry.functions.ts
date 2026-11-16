@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 
 import { enquirySchema, fieldErrorsFrom, MIN_FILL_TIME_MS, submissionMetaSchema, type EnquiryFieldErrors } from "./enquiry-schema";
 import { getPackage, getService } from "./services";
+import { PUBLIC_ORIGIN } from "./seo";
 import { buildStaticFormsPayload, STATIC_FORMS_ENDPOINT } from "./static-forms";
 
 export type SubmitEnquiryResult =
@@ -77,7 +78,15 @@ async function sendToStaticForms(enquiry: Parameters<typeof buildStaticFormsPayl
   try {
     const res = await fetch(STATIC_FORMS_ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      // The live server sends no browser headers by default, and Static Forms' hosting firewall
+      // rejects such requests with 403. Identify the site explicitly so submissions are accepted.
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "User-Agent": "Mozilla/5.0 (compatible; BrainboxPress-Website/1.0; +https://brainboxworld.net)",
+        Origin: PUBLIC_ORIGIN,
+        Referer: `${PUBLIC_ORIGIN}/`,
+      },
       body: JSON.stringify(buildStaticFormsPayload(apiKey, enquiry)),
       signal: AbortSignal.timeout(12_000),
     });
