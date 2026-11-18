@@ -17,7 +17,16 @@ export type ServiceId =
   | "book-cover-design"
   | "book-formatting"
   | "book-launch-campaign"
-  | "author-branding";
+  | "author-branding"
+  | "book-editing"
+  | "proofreading"
+  | "kdp-publishing-assistance"
+  | "discoverability-optimization"
+  | "book-marketing-strategy"
+  | "arc-reader-coordination"
+  | "author-newsletter-setup"
+  | "book-translation"
+  | "book-adaptation";
 
 export type ServiceCategory = "visibility" | "presence" | "reach";
 
@@ -501,6 +510,276 @@ export const SERVICES: Service[] = [
       title: "Author Branding Services — Logo, Bio & Media Kit | BrainboxPress",
       description:
         "Author branding services: brand identity, author logo, biography, media kit and social profile branding for a consistent, recognisable author presence. Request a quote.",
+    },
+  },
+  {
+    id: "book-editing",
+    slug: "book-editing",
+    number: "17",
+    title: "Book Editing",
+    category: "visibility",
+    formLabel: "Book Editing — request a quote",
+    summary: "Manuscript assessment, developmental editing and copyediting to prepare your book for readers.",
+    description: [
+      "Editing happens at different levels, and it helps to know which one your manuscript needs. A manuscript assessment gives big-picture feedback; developmental editing works on structure, story and argument; copyediting refines sentences for clarity, consistency and correctness.",
+      "We recommend the right level after reviewing a sample of your manuscript, and agree the scope with you before work begins. Editing is carried out by experienced editors, coordinated by BrainboxPress where a specialist is needed.",
+    ],
+    scope: [
+      "Manuscript assessment (big-picture feedback report)",
+      "Developmental editing (structure, pacing, story or argument)",
+      "Copyediting (clarity, consistency, grammar and style)",
+      "Manuscript preparation for formatting and publishing",
+      "Style sheet for consistent names, terms and spelling",
+    ],
+    audience: "Authors with a complete draft who want professional feedback or editing before publishing.",
+    quoteBasis: "Quoted by word count and editing level",
+    cta: "Request a Quote",
+    note: "Editing improves a manuscript's quality and readiness; it does not guarantee publication, reviews or sales.",
+    messageHint: "Please share your word count, genre, and whether you'd like an assessment, developmental editing or copyediting.",
+    seo: {
+      title: "Book Editing Services — Developmental & Copyediting | BrainboxPress",
+      description:
+        "Book editing for authors: manuscript assessment, developmental editing and copyediting to prepare your book for publishing. Request a quote from BrainboxPress.",
+    },
+  },
+  {
+    id: "proofreading",
+    slug: "proofreading",
+    number: "18",
+    title: "Proofreading",
+    category: "visibility",
+    formLabel: "Proofreading — request a quote",
+    summary: "A final, careful check for typos, spelling, punctuation and consistency before you publish.",
+    description: [
+      "Proofreading is the last quality check before publication. It focuses on catching remaining typos, spelling and punctuation errors, missing words and small inconsistencies — not on rewriting your text.",
+      "It works best on a manuscript that has already been edited, and can be done on your final manuscript or on formatted proof pages.",
+    ],
+    scope: [
+      "Spelling, punctuation and typo correction",
+      "Consistency checks (names, capitalisation, numbering)",
+      "Proofreading of formatted proof pages",
+      "Tracked changes so you approve every correction",
+    ],
+    audience: "Authors whose manuscript has been edited and is nearly ready to publish.",
+    quoteBasis: "Quoted by word count",
+    cta: "Request a Quote",
+    messageHint: "Please share your word count, genre, and whether the manuscript has already been edited.",
+    seo: {
+      title: "Book Proofreading Services for Authors | BrainboxPress",
+      description:
+        "Professional book proofreading for authors: a final check for typos, spelling, punctuation and consistency before you publish. Request a quote from BrainboxPress.",
+    },
+  },
+  {
+    id: "kdp-publishing-assistance",
+    slug: "amazon-kdp-publishing-assistance",
+    number: "19",
+    title: "Amazon KDP Publishing Assistance",
+    category: "visibility",
+    formLabel: "Amazon KDP Publishing Assistance — request a quote",
+    summary: "Step-by-step help preparing and publishing your book on Amazon KDP, with distribution guidance.",
+    description: [
+      "Publishing on Amazon KDP involves many details: account setup, files, pricing, metadata, previews and proofs. We guide you through each step, or set up your book listing with you, so it goes live correctly.",
+      "We also review whether your book is ready to publish and explain your distribution options. BrainboxPress is not a publishing house: you remain the publisher of your book and keep control of your account and royalties.",
+    ],
+    scope: [
+      "Publishing readiness assessment",
+      "KDP account and book setup guidance",
+      "eBook and paperback upload support",
+      "Pricing, territory and metadata guidance",
+      "Proof copy review",
+      "Publishing and distribution guidance beyond Amazon",
+    ],
+    audience: "First-time self-publishers, or authors who want a second pair of eyes before going live.",
+    quoteBasis: "Quoted by formats and level of support",
+    cta: "Request a Quote",
+    note: "Publishing follows Amazon's current KDP terms and review process, which BrainboxPress does not control.",
+    messageHint: "Tell us where you are in the publishing process and which formats (eBook, paperback, hardcover) you plan to publish.",
+    seo: {
+      title: "Amazon KDP Publishing Assistance for Authors | BrainboxPress",
+      description:
+        "Amazon KDP publishing assistance for self-published authors: readiness review, book setup, uploads, pricing, proofs and distribution guidance. Request a quote.",
+    },
+  },
+  {
+    id: "discoverability-optimization",
+    slug: "book-discoverability-optimization",
+    number: "20",
+    title: "Book Discoverability Optimization",
+    category: "visibility",
+    formLabel: "Book Discoverability Optimization — request a quote",
+    summary: "An audit of how your book appears across retailers, Goodreads and search engines — with clear improvements.",
+    description: [
+      "Readers find books in many places: retailer searches, Goodreads, Google and, increasingly, AI search assistants. We review how your book and author name appear across these places and recommend improvements so the information is accurate, consistent and easy to find.",
+      "This complements Amazon KDP Optimization by looking beyond a single listing at your book's wider online presence.",
+    ],
+    scope: [
+      "Book retailer listing audit",
+      "Goodreads author profile optimization",
+      "Search engine optimization for your book and author pages",
+      "AI search and discoverability review",
+      "Consistent book information across platforms",
+    ],
+    audience: "Published authors who want their book information to be accurate and consistent wherever readers look.",
+    quoteBasis: "Quoted after an initial review",
+    cta: "Request a Quote",
+    note: "Discoverability improvements create better opportunities to be found; they don't guarantee rankings, traffic or sales.",
+    messageHint: "Please include links to your book's retailer pages, Goodreads page and author website if you have one.",
+    seo: {
+      title: "Book Discoverability Optimization — Retailers, Goodreads & Search | BrainboxPress",
+      description:
+        "Book discoverability services: retailer listing audits, Goodreads author profile optimization, and search and AI discoverability for your book. Request a quote.",
+    },
+  },
+  {
+    id: "book-marketing-strategy",
+    slug: "book-marketing-strategy",
+    number: "21",
+    title: "Book Marketing Strategy & Campaigns",
+    category: "reach",
+    formLabel: "Book Marketing Strategy & Campaigns — request a quote",
+    summary: "A tailored marketing plan and campaigns across Facebook, Pinterest and more, built around your book and readers.",
+    description: [
+      "Not every book needs the same marketing. We look at your genre, readers, goals and budget, then recommend a practical plan — and can run the campaigns with you.",
+      "Campaigns can cover platforms beyond TikTok and Instagram, such as Facebook and Pinterest, as well as series promotion, seasonal campaigns, reader outreach and promotional graphics.",
+    ],
+    scope: [
+      "Book marketing strategy and plan",
+      "Facebook book promotion",
+      "Pinterest book marketing",
+      "Social media content and promotional graphics",
+      "Book series and seasonal campaigns",
+      "Book discovery and reader outreach campaigns",
+    ],
+    audience: "Authors who want a clear plan rather than one-off promotions, or a campaign on platforms beyond TikTok and Instagram.",
+    quoteBasis: "Quoted from the agreed plan",
+    cta: "Request a Quote",
+    note: "Advertising spend and paid placements are not included unless stated in your quotation. Exposure, sales and viral performance are not guaranteed.",
+    messageHint: "Tell us about your book, genre, goals, and any marketing you've already tried.",
+    seo: {
+      title: "Book Marketing Strategy & Campaigns for Authors | BrainboxPress",
+      description:
+        "Book marketing strategy and campaigns for authors: tailored plans, Facebook and Pinterest promotion, series and seasonal campaigns, and reader outreach. Request a quote.",
+    },
+  },
+  {
+    id: "arc-reader-coordination",
+    slug: "arc-reader-coordination",
+    number: "22",
+    title: "ARC Reader Coordination",
+    category: "reach",
+    formLabel: "ARC Reader Coordination — request a quote",
+    summary: "Organised distribution of advance reader copies to readers who have chosen to read and consider reviewing your book.",
+    description: [
+      "Advance reader copies (ARCs) let interested readers read your book before or around release. We help you plan the ARC process, prepare sign-up and distribution, and keep track of readers.",
+      "Reviews are always optional and honest. We never pay for reviews, script praise or require positive feedback, and we follow each retailer's current review guidelines.",
+    ],
+    scope: [
+      "ARC plan and timeline",
+      "ARC reader sign-up page or form",
+      "Secure advance copy distribution",
+      "Reader communication and reminders",
+      "Tracking of participating readers",
+    ],
+    audience: "Authors preparing a launch who want early readers to experience the book.",
+    quoteBasis: "Quoted by scope and timeline",
+    cta: "Request a Quote",
+    note: "Reviews are optional and their content is the reader's own; the number and rating of reviews are not guaranteed.",
+    messageHint: "Tell us your release date, genre and the formats you can share as advance copies.",
+    seo: {
+      title: "ARC Reader Coordination for Book Launches | BrainboxPress",
+      description:
+        "Advance reader copy (ARC) coordination for authors: ARC planning, reader sign-ups, secure distribution and reader communication, following retailer guidelines.",
+    },
+  },
+  {
+    id: "author-newsletter-setup",
+    slug: "author-newsletter-setup",
+    number: "23",
+    title: "Author Newsletter Setup",
+    category: "presence",
+    formLabel: "Author Newsletter Setup — request a quote",
+    summary: "Set up a permission-based reader newsletter with sign-up pages, welcome emails and a reader magnet.",
+    description: [
+      "A newsletter lets you stay in touch with readers who have chosen to hear from you. We help you set it up properly: an email platform, a sign-up page, a welcome sequence and an optional reader magnet such as a sample chapter or bonus story.",
+      "Lists are built only from readers who opt in. We never buy, scrape or add contacts without permission.",
+    ],
+    scope: [
+      "Newsletter platform setup",
+      "Reader sign-up landing page",
+      "Welcome email automation",
+      "Reader magnet creation",
+      "New release email campaigns",
+      "Reader community and engagement strategy",
+    ],
+    audience: "Authors who want a direct, long-term relationship with their readers.",
+    quoteBasis: "Quoted by scope",
+    cta: "Request a Quote",
+    note: "Email platform subscription fees, if any, are separate unless stated in your quotation.",
+    messageHint: "Tell us whether you already have a newsletter or website, and what you'd like readers to receive.",
+    seo: {
+      title: "Author Newsletter Setup & Reader Magnets | BrainboxPress",
+      description:
+        "Author newsletter setup: platform, sign-up landing page, welcome emails and reader magnets for building a permission-based reader list. Request a quote.",
+    },
+  },
+  {
+    id: "book-translation",
+    slug: "book-translation-coordination",
+    number: "24",
+    title: "Book Translation Coordination",
+    category: "reach",
+    formLabel: "Book Translation Coordination — request a quote",
+    summary: "Translation and localization of your book, coordinated with qualified professional translators.",
+    description: [
+      "Translating a book opens it to readers in other languages. We coordinate the work with qualified professional translators and reviewers, keeping you informed at each stage.",
+      "Localization adapts details such as spelling, units and cultural references for the new market. Your quotation explains who will carry out the translation and what's included.",
+    ],
+    scope: [
+      "Coordination with qualified professional translators",
+      "Translation of manuscript, description and metadata",
+      "Localization for the target market",
+      "Review by a second linguist where agreed",
+      "Files ready for formatting in the new language",
+    ],
+    audience: "Authors who want to publish their book for readers in another language.",
+    quoteBasis: "Quoted by word count and language pair",
+    cta: "Request a Quote",
+    note: "Translation is delivered through specialist partners, whom we coordinate. Translation rights and agreements remain your responsibility.",
+    messageHint: "Please share your word count, the original language and the language(s) you'd like.",
+    seo: {
+      title: "Book Translation Coordination & Localization | BrainboxPress",
+      description:
+        "Book translation coordination for authors: translation and localization by qualified professional translators, managed by BrainboxPress. Request a quote.",
+    },
+  },
+  {
+    id: "book-adaptation",
+    slug: "book-to-screen-adaptation-support",
+    number: "25",
+    title: "Book-to-Screen Adaptation Support",
+    category: "reach",
+    formLabel: "Book-to-Screen Adaptation Support — request a quote",
+    summary: "Pitch decks and project presentations that present your book's screen potential professionally.",
+    description: [
+      "If you believe your book could work as a film or series, it helps to present it clearly. We help you prepare adaptation materials such as a pitch deck, logline and synopsis, and a visual project presentation.",
+      "This is presentation and development support only. We do not act as a literary agent or producer, and we cannot guarantee representation, option agreements or film deals.",
+    ],
+    scope: [
+      "Adaptation pitch deck",
+      "Logline and synopsis development",
+      "Visual book-to-screen project presentation",
+      "Development support coordinated with specialists",
+    ],
+    audience: "Authors exploring the screen potential of their book.",
+    quoteBasis: "Quoted by scope",
+    cta: "Request a Quote",
+    note: "Adaptation support does not guarantee agent representation, publishing deals, film deals or adaptation agreements.",
+    messageHint: "Tell us about your book, its genre and whether you see it as a film or a series.",
+    seo: {
+      title: "Book-to-Screen Adaptation Support & Pitch Decks | BrainboxPress",
+      description:
+        "Book-to-screen adaptation support for authors: pitch decks, loglines, synopses and project presentations for film or series potential. Request a quote.",
     },
   },
 ];

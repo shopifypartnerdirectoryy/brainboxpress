@@ -15,7 +15,8 @@
 - [x] Live form: Static Forms was rejecting live-site submissions (403); fixed, published, live test accepted — owner to confirm inbox
 
 ## Master revamp brief (Nov 16 upload) — waiting on owner answers before building
-- [ ] Which proposed services are Active / Partner-coordinated / Planned (six departments)
+- [x] Owner confirmed: Amazon KDP, cover design, formatting, launch campaigns, author branding are available (quote-only)
+- [ ] Other brief services (editing, proofreading, newsletters, ARC, translation, adaptation) — waiting on owner
 - [ ] New homepage structure (new hero headline, 5-stage journey, testimonials empty state, final CTA)
 - [ ] Services overview page + priority service pages
 - [ ] Book Visibility Assessment form

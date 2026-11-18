@@ -45,7 +45,7 @@ export function PricingHighlights() {
 
         <Reveal className="mt-12">
           <ul className="divide-y divide-border border-y border-border bg-card">
-            {SERVICES.map((s) => {
+            {SERVICES.filter((s) => !s.quoteBasis || s.id === "audiobook").map((s) => {
               const details = pricingDetail(s);
               return (
                 <li key={s.id} className="grid gap-4 px-5 py-6 sm:px-8 md:grid-cols-[1fr_1.4fr_16rem] md:items-center md:gap-8">
@@ -81,6 +81,13 @@ export function PricingHighlights() {
               );
             })}
           </ul>
+          <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+            Editing, formatting, cover design, Amazon optimization, launch campaigns, branding, translation and our other
+            tailored services are quoted individually.{" "}
+            <Link to="/services" className="font-medium text-navy underline decoration-gold underline-offset-4 hover:text-gold-deep">
+              See all services
+            </Link>
+          </p>
         </Reveal>
       </div>
     </section>

@@ -83,7 +83,7 @@ function ServiceDetail({ service }: { service: Service }) {
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link to="/" hash="services" className="hover:text-navy">
+                <Link to="/services" className="hover:text-navy">
                   Services
                 </Link>
               </li>
@@ -110,6 +110,28 @@ function ServiceDetail({ service }: { service: Service }) {
                   <p key={p}>{p}</p>
                 ))}
               </div>
+              {service.audience && (
+                <p className="mt-8 max-w-2xl border-l-2 border-gold pl-5 text-charcoal">
+                  <span className="eyebrow mb-1 block font-sans text-navy">Who it's for</span>
+                  {service.audience}
+                </p>
+              )}
+              {service.scope && (
+                <div className="mt-10">
+                  <h2 className="eyebrow font-sans text-navy">What a quotation can cover</h2>
+                  <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                    {service.scope.map((item) => (
+                      <li key={item} className="flex gap-3 text-charcoal">
+                        <Check className="mt-1 h-4 w-4 shrink-0 text-gold-deep" aria-hidden="true" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    The exact scope, price and timeline are agreed with you in writing before any work begins.
+                  </p>
+                </div>
+              )}
               {service.inclusions && (
                 <div className="mt-10">
                   <h2 className="eyebrow font-sans text-navy">What's included</h2>

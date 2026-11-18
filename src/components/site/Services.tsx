@@ -1,5 +1,10 @@
 import { CalendarDays } from "lucide-react";
 
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { visibleDepartments } from "@/lib/departments";
 import { getService, SERVICES, SOCIAL_MEDIA_PACKAGES, type ServiceId } from "@/lib/services";
 
 import { EmailMarketingPanel } from "./EmailMarketingPanel";
@@ -39,7 +44,7 @@ export function Services() {
             eyebrow="Our Services"
             title={
               <>
-                {SERVICES.length} ways to grow <em className="italic text-gold-deep">your book's reach.</em>
+                Ways to grow <em className="italic text-gold-deep">your book's reach.</em>
               </>
             }
           />
@@ -95,6 +100,34 @@ export function Services() {
         <div className="mt-6">
           <CardGrid ids={ROW_TWO} />
         </div>
+
+        <Reveal className="mt-16 border-t-2 border-gold bg-card p-7 shadow-editorial sm:p-10">
+          <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <div>
+              <p className="eyebrow text-gold-deep">The full catalogue</p>
+              <h3 className="mt-3 text-4xl leading-tight text-navy">
+                {SERVICES.length} services across six departments
+              </h3>
+            </div>
+            <Button asChild variant="outlineNavy" size="xl">
+              <Link to="/services">
+                Explore All Services <ArrowRight aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
+          <ul className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+            {visibleDepartments().map((d) => (
+              <li key={d.id}>
+                <Link to="/services" hash={d.id} className="font-serif text-2xl text-navy hover:text-gold-deep">
+                  {d.title}
+                </Link>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {d.services.map((x) => x.title).join(" · ")}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

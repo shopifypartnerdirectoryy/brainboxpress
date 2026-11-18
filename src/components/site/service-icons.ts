@@ -15,6 +15,14 @@ import {
   AlignLeft,
   Rocket,
   BadgeCheck,
+  PenLine,
+  SpellCheck,
+  Upload,
+  SearchCheck,
+  Target,
+  Users,
+  MailPlus,
+  Languages,
   type LucideIcon,
 } from "lucide-react";
 
@@ -37,4 +45,13 @@ export const SERVICE_ICONS: Record<ServiceId, LucideIcon> = {
   "book-formatting": AlignLeft,
   "book-launch-campaign": Rocket,
   "author-branding": BadgeCheck,
+  "book-editing": PenLine,
+  proofreading: SpellCheck,
+  "kdp-publishing-assistance": Upload,
+  "discoverability-optimization": SearchCheck,
+  "book-marketing-strategy": Target,
+  "arc-reader-coordination": Users,
+  "author-newsletter-setup": MailPlus,
+  "book-translation": Languages,
+  "book-adaptation": Clapperboard,
 };
