@@ -11,6 +11,7 @@ import { Logo } from "./Logo";
 /** Links to a homepage section: a plain in-page anchor on the homepage, a router link elsewhere. */
 function SectionLink({
   id,
+  page,
   onHome,
   className,
   onClick,
@@ -18,12 +19,20 @@ function SectionLink({
   ...rest
 }: {
   id: string;
+  page?: "/services" | "/resources" | "/assessment" | undefined;
   onHome: boolean;
   className?: string;
   onClick?: () => void;
   children: ReactNode;
   "aria-current"?: "true" | undefined;
 }) {
+  if (page) {
+    return (
+      <Link to={page} className={className} onClick={onClick} {...rest}>
+        {children}
+      </Link>
+    );
+  }
   if (onHome) {
     return (
       <a href={`#${id}`} className={className} onClick={onClick} {...rest}>
@@ -53,7 +62,7 @@ export function Header({ onHome = true }: { onHome?: boolean }) {
   // Highlight the homepage section currently in view.
   useEffect(() => {
     if (!onHome) return;
-    const sections = NAV_LINKS.map((l) => document.getElementById(l.id)).filter(Boolean) as HTMLElement[];
+    const sections = NAV_LINKS.filter((l) => !l.page).map((l) => document.getElementById(l.id)).filter(Boolean) as HTMLElement[];
     const io = new IntersectionObserver(
       (entries) => {
         const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -109,6 +118,7 @@ export function Header({ onHome = true }: { onHome?: boolean }) {
               <li key={link.id}>
                 <SectionLink
                   id={link.id}
+                  page={link.page}
                   onHome={onHome}
                   aria-current={active === link.id ? "true" : undefined}
                   className={cn(
@@ -150,6 +160,7 @@ export function Header({ onHome = true }: { onHome?: boolean }) {
               <li key={link.id}>
                 <SectionLink
                   id={link.id}
+                  page={link.page}
                   onHome={onHome}
                   onClick={close}
                   className="flex items-baseline gap-4 py-3.5 font-serif text-2xl text-navy transition-colors hover:text-gold-deep"
@@ -164,6 +175,11 @@ export function Header({ onHome = true }: { onHome?: boolean }) {
             <SectionLink id="contact" onHome={onHome} onClick={close}>
               Work With Us
             </SectionLink>
+          </Button>
+          <Button asChild variant="outlineNavy" size="xl" className="mt-3 w-full">
+            <Link to="/assessment" onClick={close}>
+              Free Book Assessment
+            </Link>
           </Button>
         </nav>
       </div>

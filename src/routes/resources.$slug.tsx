@@ -6,6 +6,7 @@ import { PageShell } from "@/components/site/PageShell";
 import { Button } from "@/components/ui/button";
 import { getArticle, relatedArticles } from "@/lib/resources";
 import { pageHead, PUBLIC_ORIGIN } from "@/lib/seo";
+import { getServiceBySlug } from "@/lib/services";
 
 export const Route = createFileRoute("/resources/$slug")({
   loader: ({ params }) => {
@@ -59,21 +60,6 @@ export const Route = createFileRoute("/resources/$slug")({
 
 const focus =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
-
-const SERVICE_LABELS: Record<string, string> = {
-  "amazon-kdp-optimization": "Amazon KDP Optimization",
-  "book-cover-design": "Book Cover Design",
-  "book-formatting": "Book Formatting",
-  "book-launch-campaigns": "Book Launch Campaigns",
-  "author-branding": "Author Branding",
-  "tiktok-book-promotion": "TikTok Book Promotion",
-  "instagram-book-promotion": "Instagram Book Promotion",
-  "book-trailers": "Book Trailers",
-  "author-social-media-management": "Author Social Media Management",
-  "email-marketing-for-authors": "Email Marketing for Authors",
-  "author-website-design": "Author Website Design",
-  "goodreads-listopia-placement": "Goodreads Listopia Placement",
-};
 
 function formatPublishedDate(value: string) {
   return new Intl.DateTimeFormat("en", {
@@ -227,7 +213,7 @@ function ResourceArticlePage() {
               <li aria-hidden="true">/</li>
               <li>
                 <Link
-                  to="/resources/"
+                  to="/resources"
                   className={`rounded-sm text-navy hover:underline ${focus}`}
                 >
                   Resources
@@ -334,8 +320,7 @@ function ResourceArticlePage() {
                       className={`inline-flex min-h-12 max-w-full items-center gap-3 rounded-sm border border-border bg-card px-5 py-3 text-navy hover:border-gold ${focus}`}
                     >
                       <span className="min-w-0 break-words">
-                        {SERVICE_LABELS[serviceSlug] ??
-                          serviceSlug.replaceAll("-", " ")}
+                        {getServiceBySlug(serviceSlug)?.title ?? serviceSlug.replaceAll("-", " ")}
                       </span>
                       <ArrowRight
                         className="size-4 shrink-0 text-gold-deep"

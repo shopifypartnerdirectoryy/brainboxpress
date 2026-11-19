@@ -1,6 +1,10 @@
 import { z } from "zod";
 
+import { BUDGET_RANGES, CONTACT_METHODS, PUBLISHING_STAGES } from "./assessment-schema";
 import { getService, SERVICES } from "./services";
+
+const optionalChoice = <T extends readonly [string, ...string[]]>(options: T, message: string) =>
+  z.union([z.enum(options, { errorMap: () => ({ message }) }), z.literal("")]).optional().default("");
 
 const serviceIds = SERVICES.map((s) => s.id) as [string, ...string[]];
 
@@ -23,6 +27,16 @@ export const enquirySchema = z
       .trim()
       .min(10, "Please tell us a little more (at least 10 characters).")
       .max(3000, "Please keep your message under 3,000 characters."),
+    publishingStage: optionalChoice(PUBLISHING_STAGES, "Please choose a publishing stage."),
+    budget: optionalChoice(BUDGET_RANGES, "Please choose a budget range."),
+    preferredContact: optionalChoice(CONTACT_METHODS, "Please choose a contact method."),
+    phone: z
+      .string()
+      .trim()
+      .max(40, "Please keep the phone number under 40 characters.")
+      .refine((v) => v === "" || /^[+()\d][\d\s().-]{5,}$/.test(v), "Please enter a valid phone number.")
+      .optional()
+      .default(""),
   })
   .superRefine((value, ctx) => {
     const service = getService(value.service);
@@ -33,6 +47,9 @@ export const enquirySchema = z
       }
     } else if (value.package) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["package"], message: "This service has no packages." });
+    }
+    if ((value.preferredContact === "Phone" || value.preferredContact === "WhatsApp") && !value.phone) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["phone"], message: "Please add a phone number so we can reach you." });
     }
   });
 
@@ -46,7 +63,18 @@ export const submissionMetaSchema = z.object({
   elapsedMs: z.number().int().nonnegative(),
 });
 
-export type EnquiryField = "fullName" | "email" | "bookTitle" | "authorName" | "service" | "package" | "message";
+export type EnquiryField =
+  | "fullName"
+  | "email"
+  | "bookTitle"
+  | "authorName"
+  | "service"
+  | "package"
+  | "message"
+  | "publishingStage"
+  | "budget"
+  | "preferredContact"
+  | "phone";
 export type EnquiryFieldErrors = { [K in EnquiryField]?: string | undefined };
 
 export function fieldErrorsFrom(error: z.ZodError): EnquiryFieldErrors {

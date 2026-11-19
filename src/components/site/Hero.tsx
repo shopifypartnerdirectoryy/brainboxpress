@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 
 import heroImage from "@/assets/hero-books.webp";
@@ -6,13 +7,12 @@ import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/site";
 
 const AREAS = [
-  "Book Features",
-  "Book Trailers",
-  "Social Media Management",
-  "Email Marketing",
-  "Audiobook Services",
-  "Author Websites",
-  "Goodreads Promotion",
+  "Publishing Preparation",
+  "Book Optimization",
+  "Book Marketing",
+  "Author Branding",
+  "Reader Engagement",
+  "Audio & Translation",
 ];
 
 export function Hero() {
@@ -25,25 +25,31 @@ export function Hero() {
             {SITE.tagline}
           </p>
           <h1 id="hero-title" className="mt-7 text-[2.6rem] leading-[1.02] text-navy sm:text-6xl lg:text-[4.4rem]">
-            Where Books Find <em className="font-serif italic text-gold-deep">Visibility</em> and Authors Find New
-            Opportunities.
+            Helping Authors Get <em className="font-serif italic text-gold-deep">Discovered</em>, Build Their Presence &amp;
+            Reach More Readers.
           </h1>
           <p className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            BrainboxPress is an author-services and book-growth brand. We help authors present their books
-            professionally and reach new readers through book features, trailers, social media, email marketing,
-            audiobooks and author websites — with clear, transparent pricing.
+            BrainboxPress is an author-services and book-growth brand. From editing, formatting and covers to Amazon
+            optimization, book promotion, author websites and reader engagement, we help authors present their books
+            professionally and reach new readers — with clear, honest pricing.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <Button asChild variant="gold" size="xl">
-              <a href="#services">
+              <Link to="/services">
                 Explore Our Services <ArrowRight />
-              </a>
+              </Link>
             </Button>
             <Button asChild variant="outlineNavy" size="xl">
-              <a href="#contact">Start a Conversation</a>
+              <a href="#contact">Discuss Your Book</a>
             </Button>
           </div>
-          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-navy">
+          <p className="mt-5 text-sm text-muted-foreground">
+            Not sure where to start?{" "}
+            <Link to="/assessment" className="font-semibold text-navy underline decoration-gold underline-offset-4 hover:text-gold-deep">
+              Request a free Book Visibility Assessment
+            </Link>
+          </p>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-navy">
             {["Clear, published pricing", "Author approval where applicable", "Honest, realistic communication"].map((t) => (
               <li key={t} className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rotate-45 bg-gold" aria-hidden="true" />

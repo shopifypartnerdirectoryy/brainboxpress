@@ -20,7 +20,7 @@ function TermsPage() {
     <LegalPage
       title="Terms of Service"
       intro="The general terms for using our website and commissioning BrainboxPress author services."
-      updated="17 November 2026"
+      updated="19 November 2026"
       sections={[
         {
           id: "about",
@@ -53,7 +53,7 @@ function TermsPage() {
           body: (
             <p>
               Our process is enquiry, review, recommendation, then written agreement on scope, price and timeline. Work
-              begins after your approval and the agreed payment arrangements. Sending an enquiry does not start a project
+              begins after your approval and full payment. Sending an enquiry does not start a project
               or create any obligation.
             </p>
           ),
@@ -63,9 +63,9 @@ function TermsPage() {
           heading: "Payment arrangements",
           body: (
             <p>
-              Payment amounts, stages and due dates are as stated in your written quotation or otherwise agreed in writing
-              before work begins. We may pause work if an agreed payment is overdue, after letting you know. Changes to the
-              agreed scope may need a revised quotation and your approval.
+              Full payment is due before work begins. The amount is the published price for the service or the total in
+              your written quotation. Work is scheduled once payment has been received. Changes to the agreed scope may
+              need a revised quotation and your approval, with any additional amount paid before that extra work starts.
             </p>
           ),
         },

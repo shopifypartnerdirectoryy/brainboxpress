@@ -16,11 +16,11 @@
 
 ## Master revamp brief (Nov 16 upload) — waiting on owner answers before building
 - [x] Owner confirmed: Amazon KDP, cover design, formatting, launch campaigns, author branding are available (quote-only)
-- [ ] Other brief services (editing, proofreading, newsletters, ARC, translation, adaptation) — waiting on owner
+- [x] Other brief services (editing, proofreading, newsletters, ARC, translation, adaptation) — owner chose show as available
 - [ ] New homepage structure (new hero headline, 5-stage journey, testimonials empty state, final CTA)
 - [ ] Services overview page + priority service pages
 - [ ] Book Visibility Assessment form
-- [ ] Legal pages (Privacy, Terms, Refund & Cancellation) — needs owner's payment/refund/revision terms
+- [x] Legal pages (Privacy, Terms, Refund & Cancellation) — drafts; full payment upfront confirmed; revision count still general
 - [ ] Author resources / blog structure
 - [ ] Enquiry status tracking (lead management) + analytics
 

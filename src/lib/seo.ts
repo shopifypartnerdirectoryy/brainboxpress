@@ -112,7 +112,7 @@ export function servicePageSchema(s: Service) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: `${PUBLIC_ORIGIN}/` },
-          { "@type": "ListItem", position: 2, name: "Services", item: `${PUBLIC_ORIGIN}/#services` },
+          { "@type": "ListItem", position: 2, name: "Services", item: `${PUBLIC_ORIGIN}/services` },
           { "@type": "ListItem", position: 3, name: s.title, item: servicePageUrl(s) },
         ],
       },

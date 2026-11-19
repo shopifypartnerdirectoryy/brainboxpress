@@ -3,6 +3,7 @@ import { AlertCircle, CheckCircle2, ChevronDown, Loader2, Send } from "lucide-re
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
+import { BUDGET_RANGES, CONTACT_METHODS, PUBLISHING_STAGES } from "@/lib/assessment-schema";
 import { enquirySchema, fieldErrorsFrom, type EnquiryField, type EnquiryFieldErrors } from "@/lib/enquiry-schema";
 import { submitEnquiry } from "@/lib/enquiry.functions";
 import { getService, SERVICES } from "@/lib/services";
@@ -19,13 +20,29 @@ type Values = {
   service: string;
   package: string;
   message: string;
+  publishingStage: string;
+  budget: string;
+  preferredContact: string;
+  phone: string;
 };
 
-const EMPTY: Values = { fullName: "", email: "", bookTitle: "", authorName: "", service: "", package: "", message: "" };
+const EMPTY: Values = {
+  fullName: "",
+  email: "",
+  bookTitle: "",
+  authorName: "",
+  service: "",
+  package: "",
+  message: "",
+  publishingStage: "",
+  budget: "",
+  preferredContact: "",
+  phone: "",
+};
 
 type Status = { kind: "idle" } | { kind: "submitting" } | { kind: "success" } | { kind: "error"; message: string };
 
-const newRequestId = () =>
+export const newRequestId = () =>
   typeof crypto !== "undefined" && "randomUUID" in crypto
     ? crypto.randomUUID()
     : "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
@@ -285,6 +302,53 @@ export function EnquiryForm() {
           <FieldError id={errId("message")} error={errors.message} />
         </div>
 
+        <SelectField
+          id={fieldId("publishingStage")}
+          errId={errId("publishingStage")}
+          label="Publishing Stage"
+          placeholder="Select a stage"
+          options={PUBLISHING_STAGES}
+          value={values.publishingStage}
+          error={errors.publishingStage}
+          onChange={(v) => update("publishingStage", v)}
+          disabled={submitting}
+        />
+        <SelectField
+          id={fieldId("budget")}
+          errId={errId("budget")}
+          label="Budget Range"
+          placeholder="Select a range"
+          options={BUDGET_RANGES}
+          value={values.budget}
+          error={errors.budget}
+          onChange={(v) => update("budget", v)}
+          disabled={submitting}
+        />
+        <SelectField
+          id={fieldId("preferredContact")}
+          errId={errId("preferredContact")}
+          label="Preferred Contact"
+          placeholder="Select a method"
+          options={CONTACT_METHODS}
+          value={values.preferredContact}
+          error={errors.preferredContact}
+          onChange={(v) => update("preferredContact", v)}
+          disabled={submitting}
+        />
+        <TextField
+          id={fieldId("phone")}
+          errId={errId("phone")}
+          label="Phone / WhatsApp"
+          type="tel"
+          autoComplete="tel"
+          inputMode="tel"
+          optional={values.preferredContact !== "Phone" && values.preferredContact !== "WhatsApp"}
+          value={values.phone}
+          error={errors.phone}
+          onChange={(v) => update("phone", v)}
+          disabled={submitting}
+        />
+
         {/* Honeypot: hidden from people, tempting for bots. */}
         <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
           <label htmlFor={fieldId("website")}>Leave this field empty</label>
@@ -321,18 +385,77 @@ export function EnquiryForm() {
   );
 }
 
-const inputClass =
+export const inputClass =
   "block w-full border-0 border-b border-input bg-transparent px-0 py-3 text-base text-charcoal placeholder:text-muted-foreground/70 transition-colors focus:border-navy focus:outline-none focus:ring-0 focus-visible:outline-none disabled:opacity-60 aria-[invalid=true]:border-destructive";
 
-function FieldLabel({ htmlFor, children }: { htmlFor: string; children: string }) {
+export function FieldLabel({ htmlFor, children, optional }: { htmlFor: string; children: string; optional?: boolean }) {
   return (
     <label htmlFor={htmlFor} className="eyebrow block text-navy">
-      {children} <span className="text-gold-deep">*</span>
+      {children}{" "}
+      {optional ? (
+        <span className="font-sans text-[0.7rem] normal-case tracking-normal text-muted-foreground">(optional)</span>
+      ) : (
+        <span className="text-gold-deep">*</span>
+      )}
     </label>
   );
 }
 
-function FieldError({ id, error }: { id: string; error?: string | undefined }) {
+export function SelectField({
+  id,
+  errId,
+  label,
+  placeholder,
+  options,
+  value,
+  onChange,
+  error,
+  disabled,
+  optional = true,
+}: {
+  id: string;
+  errId: string;
+  label: string;
+  placeholder: string;
+  options: readonly string[];
+  value: string;
+  onChange: (v: string) => void;
+  error?: string | undefined;
+  disabled?: boolean;
+  optional?: boolean;
+}) {
+  return (
+    <div>
+      <FieldLabel htmlFor={id} optional={optional}>
+        {label}
+      </FieldLabel>
+      <div className="relative">
+        <select
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          disabled={disabled}
+          aria-invalid={!!error}
+          aria-describedby={error ? errId : undefined}
+          className={cn(inputClass, "appearance-none pr-10", !value && "text-muted-foreground")}
+        >
+          <option value="" disabled={!optional}>
+            {placeholder}
+          </option>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+        <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-1 top-1/2 h-4 w-4 -translate-y-1/2 text-gold-deep" />
+      </div>
+      <FieldError id={errId} error={error} />
+    </div>
+  );
+}
+
+export function FieldError({ id, error }: { id: string; error?: string | undefined }) {
   if (!error) return null;
   return (
     <p id={id} className="mt-2 text-xs text-destructive">
@@ -341,7 +464,7 @@ function FieldError({ id, error }: { id: string; error?: string | undefined }) {
   );
 }
 
-function TextField({
+export function TextField({
   id,
   errId,
   label,
@@ -352,6 +475,7 @@ function TextField({
   autoComplete,
   inputMode,
   disabled,
+  optional = false,
 }: {
   id: string;
   errId: string;
@@ -361,12 +485,15 @@ function TextField({
   error?: string | undefined;
   type?: string;
   autoComplete?: string | undefined;
-  inputMode?: "email" | "text" | undefined;
+  inputMode?: "email" | "text" | "tel" | "url" | undefined;
   disabled?: boolean;
+  optional?: boolean;
 }) {
   return (
     <div>
-      <FieldLabel htmlFor={id}>{label}</FieldLabel>
+      <FieldLabel htmlFor={id} optional={optional}>
+        {label}
+      </FieldLabel>
       <input
         id={id}
         type={type}
@@ -375,7 +502,7 @@ function TextField({
         autoComplete={autoComplete}
         inputMode={inputMode}
         disabled={disabled}
-        required
+        required={!optional}
         aria-invalid={!!error}
         aria-describedby={error ? errId : undefined}
         className={inputClass}

@@ -224,7 +224,7 @@ function RelatedServices({ current }: { current: Service }) {
           <h2 id="related-title" className="text-4xl text-navy sm:text-5xl">
             Related services
           </h2>
-          <Link to="/" hash="services" className="inline-flex items-center gap-2 text-sm font-semibold text-navy underline decoration-gold decoration-2 underline-offset-4 hover:text-gold-deep">
+          <Link to="/services" className="inline-flex items-center gap-2 text-sm font-semibold text-navy underline decoration-gold decoration-2 underline-offset-4 hover:text-gold-deep">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" /> All services
           </Link>
         </div>
